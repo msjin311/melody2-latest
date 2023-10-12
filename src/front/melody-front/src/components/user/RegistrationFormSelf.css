@@ -1,0 +1,78 @@
+section {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.section-Inner {
+    width: 1200px;
+    padding: 50px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.signupform {
+    border: 1px solid #aaa;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    padding: 50px;
+}
+.signupform h1 {
+    text-align: center;
+    padding: 10px 0;
+}
+.signupform .input-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 10px;
+}
+.signupform .input-inner input{
+    border-bottom: 1px solid #000;
+    outline: none;
+    padding: 10px;
+}
+.signupform .input-inner input[type=date] {
+    border: 1px solid #000;
+    width: 100%;
+    position: relative;
+}
+.signupform .input-inner input[type=date]::-webkit-calendar-picker-indicator {
+    position: absolute;
+    right: -10px;
+    top: 0;
+    cursor: pointer;
+    transform: translateX(-10px);
+    padding-left: 2900px;
+    padding-right: 20px;
+    padding-top: 15px;
+    height: 100%;
+}
+.gender-Inner {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+.gender-Inner div {
+    display: flex;
+}
+.gender-Inner label {
+    flex: 1;
+    display: flex;
+    padding: 10px;
+    cursor: pointer;
+}
+.submitBtn {
+    background-color: #000;
+    transition: 0.2s;
+    color: #fff;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #000;
+}
+.submitBtn:hover {
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #aaa;
+}
