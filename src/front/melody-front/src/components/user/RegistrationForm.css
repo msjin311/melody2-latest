@@ -28,10 +28,50 @@ section {
     gap: 5px;
     padding: 10px;
 }
+.input-icon-inner .check-input.on {
+    border-bottom: 2px solid red;
+}
 .signupform .input-inner input{
-    border-bottom: 1px solid #000;
     outline: none;
     padding: 10px;
+    width: 100%;
+    border-bottom: 1px solid #000;
+}
+.input-icon-inner {
+    position: relative;
+    width: 100%;
+}
+.input-check-icon {
+    position: absolute;
+    display: block;
+    width: 20px;
+    height: 20px;
+    top: 50%;
+    right: 5%;
+    transform: translateY(-50%);
+    display: none;
+}
+.input-check-icon.show {
+    display: block;
+}
+.bsicon {
+    font-size: 15pt;
+}
+.bsicon-check {
+    color: green;
+    font-weight: bold;
+    display: none;
+}
+.bsicon-check.on {
+    display: block;
+}
+.bsicon-x {
+    color: red;
+    font-weight: bold;
+    display: none;
+}
+.bsicon-x.on {
+    display: block;
 }
 .signupform .input-inner input[type=date] {
     border: 1px solid #000;

@@ -21,10 +21,6 @@ const links: LinkItem[] = [
     key: 'home',
   },
   {
-    href: '/self-SignUp',
-    key: 'self-SignUp',
-  },
-  {
     href: '/signUp',
     key: 'signUp',
   },
@@ -47,7 +43,7 @@ export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
         <ul className="flex bg-slate-500">
           {links.map(({ href, key }) => (
               <li className="flex-auto" key={key}>
-                <Link href={href} className="text-black">
+                <Link className="text-black" href={href}>
                   {key}
                 </Link>
               </li>

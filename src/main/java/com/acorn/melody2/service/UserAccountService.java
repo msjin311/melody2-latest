@@ -1,4 +1,4 @@
-package com.acorn.melody2.services;
+package com.acorn.melody2.service;
 
 import com.acorn.melody2.entity.UserAccount;
 import com.acorn.melody2.repository.UserAccountRepository;

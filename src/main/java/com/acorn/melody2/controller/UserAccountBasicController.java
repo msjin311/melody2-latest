@@ -1,7 +1,7 @@
 package com.acorn.melody2.controller;
 
 import com.acorn.melody2.entity.UserAccount;
-import com.acorn.melody2.services.UserAccountService;
+import com.acorn.melody2.service.UserAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
