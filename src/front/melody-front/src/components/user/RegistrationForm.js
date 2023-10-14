@@ -61,6 +61,7 @@ function RegistrationForm() {
         event.preventDefault();
         //이벤트가 발생시에 페이지가 초기화되는것을 방지함
 
+        //비밀번호 불일치시
         if(password !== passwordConfirm) {
             const checkInput = document.querySelectorAll(".check-input");
             checkInput.forEach((inputBox) => {
