@@ -1,23 +1,29 @@
 "use client"
 
+import './page.css'
+
 const LoginPage = () => {
     return (
-        <div className="py-8">
-            <h1 className="text-3xl font-bold mb-4">Authentication Page</h1>
-            <div className="flex flex-col space-y-4">
-                <input
-                    type="email"
-                    placeholder="Email"
-                    className="px-4 py-2 border border-gray-300 rounded"
-                />
-                <input
-                    type="password"
-                    placeholder="Password"
-                    className="px-4 py-2 border border-gray-300 rounded"
-                />
-                <button className="px-4 py-2 bg-blue-500 text-white rounded">
-                    Sign In
-                </button>
+        <div className="login-Inner">
+            <h1>Login</h1>
+            <div className="input-inner">
+                <span>AccountId</span>
+                <input type="text" placeholder="AccountId"/>
+            </div>
+
+            <div className="input-inner">
+                <span>PassWord</span>
+                <input type="password" placeholder="Password"/>
+            </div>
+
+            <div className="loginSaveBtn">
+                <div>
+                    <label><input type="checkbox"/><span>아이디 저장</span></label>
+                    <a href="#">ID/PW 찾기</a>
+                </div>
+            </div>
+            <div className="loginBtn">
+                <button>Login</button>
             </div>
         </div>
     )

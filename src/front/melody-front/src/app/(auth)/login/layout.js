@@ -1,3 +1,4 @@
+import './layout.css'
 // app/(auth)/layout.js
 
 import { ReactNode } from "react"
@@ -6,12 +7,14 @@ import { ReactNode } from "react"
 //     children: ReactNode
 // }
 
-const AuthLayout = ({children} ) => {
+const loginLayout = ({children} ) => {
     return (
-        <div className="flex flex-col min-h-screen items-center justify-center bg-gray-100 text-black">
-            <div className="bg-white p-8 rounded shadow-md">{children}</div>
+        <div className="containerLogin">
+            <section className="login">
+                {children}
+            </section>
         </div>
     )
 }
 
-export default AuthLayout
+export default loginLayout

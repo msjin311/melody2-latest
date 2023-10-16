@@ -1,0 +1,46 @@
+.login-Inner {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    width: 600px;
+    gap: 10px;
+}
+.login-Inner h1 {
+    text-align: center;
+}
+.input-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.input-inner input {
+    outline: none;
+    padding: 10px;
+    width: 100%;
+    border-bottom: 1px solid #000;
+}
+.loginSaveBtn div {
+    display: flex;
+    justify-content: space-between;
+}
+.loginSaveBtn div input[type=checkbox] {
+    cursor: pointer;
+}
+.loginSaveBtn div a {
+    color: #000;
+    text-decoration: none;
+}
+.loginBtn button {
+    background-color: #000;
+    transition: 0.2s;
+    color: #fff;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #000;
+    width: 100%;
+}
+.loginBtn button:hover {
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #aaa;
+}
