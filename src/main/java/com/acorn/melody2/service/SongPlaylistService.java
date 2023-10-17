@@ -26,6 +26,20 @@ public class SongPlaylistService {
         return songPlaylistRepository.findById(new SongPlaylist.SongPlaylistId(playlistId, songId));
     }
 
+    public SongPlaylist addSongToPlaylist(int playlistId, int songId) {
+        // Create a new SongPlaylistId object
+        SongPlaylist.SongPlaylistId songPlaylistId = new SongPlaylist.SongPlaylistId(playlistId, songId);
+
+        // Create a new SongPlaylist object and set the ids
+        SongPlaylist songPlaylist = new SongPlaylist();
+        songPlaylist.setPlaylistId(playlistId);
+        songPlaylist.setSongId(songId);
+        songPlaylist.setSongPlaylistId(songPlaylistId); // Set the SongPlaylistId
+
+        // Save the SongPlaylist object to the repository
+        return songPlaylistRepository.save(songPlaylist);
+    }
+
     public SongPlaylist saveSongPlaylist(SongPlaylist songPlaylist) {
         return songPlaylistRepository.save(songPlaylist);
     }

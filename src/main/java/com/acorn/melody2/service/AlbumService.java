@@ -2,6 +2,14 @@ package com.acorn.melody2.service;
 
 import com.acorn.melody2.entity.Album;
 import com.acorn.melody2.repository.AlbumRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
@@ -13,10 +21,13 @@ import java.util.Optional;
 public class AlbumService {
 
     private final AlbumRepository albumRepository;
+    private final EntityManager entityManager;
+    private static final Logger logger = LoggerFactory.getLogger(AlbumService.class);
 
     @Autowired
-    public AlbumService(AlbumRepository albumRepository) {
+    public AlbumService(AlbumRepository albumRepository, EntityManager entityManager) {
         this.albumRepository = albumRepository;
+        this.entityManager = entityManager;
     }
 
     public List<Album> getAllAlbums() {
@@ -78,8 +89,28 @@ public class AlbumService {
             throw new ChangeSetPersister.NotFoundException();
         }
     }
+    public List<Album> searchAlbumsByTitle(String title) {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Album> criteriaQuery = criteriaBuilder.createQuery(Album.class);
+        Root<Album> root = criteriaQuery.from(Album.class);
+
+        // Create a predicate to filter songs by title
+        Predicate titlePredicate = criteriaBuilder.like(
+                criteriaBuilder.lower(root.get("albumTitle")),
+                "%" + title.toLowerCase() + "%"
+        );
+
+        criteriaQuery.where(titlePredicate);
+
+        TypedQuery<Album> query = entityManager.createQuery(criteriaQuery);
+        logger.warn("title : " + title);
+        logger.warn(query.getResultList().toString());
+        return query.getResultList();
+    }
 
     public void deleteAlbum(int id) {
         albumRepository.deleteById(id);
     }
+
+
 }

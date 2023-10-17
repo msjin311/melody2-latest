@@ -1,10 +1,9 @@
 package com.acorn.melody2.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -15,10 +14,10 @@ public class Playlist {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Playlist_ID")
-    private int playlistId;
+    private Long playlistId;
 
     @Column(name = "UserAccount_ID")
-    private int userAccountId;
+    private Long userAccountId;
 
     @Column(name = "Playlist_Name", length = 100)
     private String playlistName;
@@ -37,6 +36,11 @@ public class Playlist {
     private UserAccount userAccount;
 
     @OneToMany(mappedBy = "playlist", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<SongPlaylist> songPlaylists;
+
+
+    @Transient
+    private List<Song> songs;
 
 }

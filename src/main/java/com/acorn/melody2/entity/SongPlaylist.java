@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.io.Serializable;
-
 @Entity
 @Table(name = "SongPlaylist")
 @Data
@@ -29,10 +28,19 @@ public class SongPlaylist {
 
     // You can add additional properties if needed
 
+    public void setSongPlaylistId(SongPlaylistId songPlaylistId) {
+        this.playlistId = songPlaylistId.getPlaylistId();
+        this.songId = songPlaylistId.getSongId();
+    }
+
     @Data
     public static class SongPlaylistId implements Serializable {
         private int playlistId;
         private int songId;
+
+        // Add a no-argument constructor
+        public SongPlaylistId() {
+        }
 
         public SongPlaylistId(int playlistId, int songId) {
             this.playlistId = playlistId;
@@ -40,3 +48,4 @@ public class SongPlaylist {
         }
     }
 }
+
