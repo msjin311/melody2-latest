@@ -7,6 +7,7 @@
 .onEditInputs-Inner {
     display: flex;
     padding: 0 30px;
+    padding-bottom: 10px;
 }
 .onEditInputs {
     display: flex;
