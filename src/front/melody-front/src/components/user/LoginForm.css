@@ -1,17 +1,18 @@
 .login-Inner {
     display: flex;
     flex-direction: column;
-    padding: 20px;
+    padding: 50px;
     width: 600px;
     gap: 10px;
 }
 .login-Inner h1 {
     text-align: center;
+    margin-bottom: 50px;
 }
 .input-inner {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 20px;
 }
 .input-inner input {
     outline: none;
