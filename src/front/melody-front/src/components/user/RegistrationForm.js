@@ -12,6 +12,8 @@ function RegistrationForm() {
     const [password, setPassword] = useState('');
     const [passwordConfirm, setPasswordConfirm] = useState('');
     const [userHashtags, setUserHashtags] = useState('');
+    const [profileImage, setProfileImage] = useState(null);
+
 
     //비밀번호 확인
     if(password && passwordConfirm !== ""){
@@ -82,7 +84,8 @@ function RegistrationForm() {
             email,
             gender,
             password,
-            userHashtags
+            userHashtags,
+            profileImage
         };
         //submit클릭시 입력한 각 데이터를 user라는 객체로 저장함
 
@@ -105,6 +108,7 @@ function RegistrationForm() {
             if(response.ok){ //위에 try, catch문이 정상적으로 (ok=200) 작동되었음
                 console.log(user)
                 alert("회원가입 완료")
+                window.location.href = '/';
             }
             else{ //위에 try, catch문이 정상적으로 작동되지않았음
                 alert("회원가입 정보를 정확하게 입력해주세요.")

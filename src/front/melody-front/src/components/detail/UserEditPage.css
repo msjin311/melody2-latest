@@ -1,8 +1,11 @@
-.myPage-Inner {
+.userEditPage-Inner {
     border: 1px solid #ccc;
     padding: 30px;
     width: 1000px;
     margin: auto;
+}
+.userEditPage-Inner h1 {
+    margin-bottom: 50px;
 }
 .onEditInputs-Inner {
     display: flex;
@@ -13,13 +16,16 @@
     display: flex;
     flex-direction: column;
     flex: 2;
-    gap: 10px;
+    gap: 20px;
 }
 .input-inner {
     display: flex;
     flex-direction: column;
     gap: 10px;
     width: 100%;
+}
+.input-inner span {
+    font-weight: bold;
 }
 .accountIdInput-inner {
     display: flex;
@@ -78,7 +84,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    gap: 10px;
+    gap: 20px;
 }
 .underEditInputs .input-inner input {
     outline: none;
@@ -100,6 +106,9 @@
     padding-right: 20px;
     padding-top: 15px;
     height: 100%;
+}
+.gender-Inner span {
+    font-weight: bold;
 }
 .gender-Inner div {
     display: flex;

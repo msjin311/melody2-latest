@@ -1,36 +1,99 @@
 "use client"
 
 import "./UserEditPage.css";
-import {useState} from "react";
+import {useState, useContext} from "react";
 import {BsCheck, BsX} from "react-icons/bs";
+import {UserContext} from "../../contexts/UserContext";
 
 const UserEditPage = () => {
+    const { userState, userDispatch } = useContext(UserContext);
+
+
+    const accountId = userState.user.accountId;
     const [name, setName] = useState('');
-    const [accountId, setAccountId] = useState('');
-    const [birthDate, setBirthDate] = useState('');
+    const [birthDate, setBirthDate] = useState(userState.user.birthDate);
     const [email, setEmail] = useState('');
     const [gender, setGender] = useState('Male');
+    const [oldpassword, setOldPassword] = useState('');
     const [password, setPassword] = useState('');
     const [passwordConfirm, setPasswordConfirm] = useState('');
     const [userHashtags, setUserHashtags] = useState('');
 
-    const user = {
-        name,
+    const userEdit = {
         accountId,
+        name,
         birthDate,
         email,
         gender,
         password,
-        userHashtags
+        userHashtags,
     };
 
+    const handleEdit =async () => {
+        try{
+            const response = await fetch(`api/user-accounts/${userState.user.userAccountId}`, {
+                method : 'PUT',
+                headers : {
+                    'content-Type' : 'application/json',
+                },
+                body : JSON.stringify(userEdit),
+            });
+
+            if (response.ok) {
+                const userData= await response.json();
+                console.log(userData);
+                alert("데이터가 정상적으로 수정되었습니다.")
+            }else {
+                console.error('Edit Failed')
+                console.log(userState.user)
+                alert("데이터 수정에 실패했습니다.")
+            }
+        }catch (error) {
+            console.error('error : ', error);
+        }
+    }
+
+    const handledelete =async () => {
+        if (confirm("정말 탈퇴 하시겠습니까?") === true) {
+            console.log(userDispatch)
+            const userDelete = { ...userState.user,  isWithdraw: 1 };
+
+
+            try {
+                const response = await fetch(`api/user-accounts/${userState.user.userAccountId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(userDelete),
+                });
+
+                if (response.ok) {
+                    const userData = await response.json();
+                    console.log(userData);
+                    console.log(userDelete);
+                    userDispatch({ type: 'LOGOUT' });
+                    alert("회원 탈퇴가 완료되었습니다.")
+                    window.location.href = '/login';
+                } else {
+                    console.error('Edit Failed')
+                    console.log(userState.user)
+                    alert("데이터 수정에 실패했습니다.")
+                }
+            } catch (error) {
+                console.error('error : ', error);
+            }
+        }
+    }
+
     return (
-        <div className="myPage-Inner">
+        <div className="userEditPage-Inner">
+            <h1>User Edit Page</h1>
             <div className="onEditInputs-Inner">
                 <div className="onEditInputs">
-                    <div className="input-inner accountIdInput-inner">
+                    <div className="input-inner">
                         <span>AccountId</span>
-                        <div>{accountId}</div>
+                        <div className="accountIdInput-inner">{userState.user.accountId}</div>
                     </div>
 
                     <div className="input-inner">
@@ -41,21 +104,21 @@ const UserEditPage = () => {
                     <div className="input-inner">
                         <span>Current PassWord</span>
                         <label className="input-icon-inner" >
-                            <input type="password" onChange={(event) => setPassword(event.target.value)} required placeholder="Password" value={password}/>
+                            <input type="password" onChange={(event) => setOldPassword(event.target.value)} required placeholder="Current PassWord" value={oldpassword}/>
                         </label>
                     </div>
 
                     <div className="input-inner">
                         <span>New PassWord</span>
                         <label className="input-icon-inner" >
-                            <input type="password" onChange={(event) => setPassword(event.target.value)} required placeholder="Password" value={password}/>
+                            <input type="password" onChange={(event) => setPassword(event.target.value)} required placeholder="New PassWord" value={password}/>
                         </label>
                     </div>
 
                     <div className="input-inner">
                         <span>New PassWord Confirmation</span>
                         <label className="input-icon-inner" >
-                            <input type="password" className="check-input" onChange={(event) => setPasswordConfirm(event.target.value)} required placeholder="ConfirmPassWord" value={passwordConfirm}/>
+                            <input type="password" className="check-input" onChange={(event) => setPasswordConfirm(event.target.value)} required placeholder="New PassWord Confirmation" value={passwordConfirm}/>
                             <span className="input-check-icon">
                         <BsCheck className="bsicon bsicon-check"/>
                         </span>
@@ -85,7 +148,7 @@ const UserEditPage = () => {
                     <div className="input-inner">
                         <span>BirthDate</span>
                         <label name="BirthDate">
-                            <input type="date" onChange={(event) => setBirthDate(event.target.value)} required name="BirthDate" placeholder="BirthDate" value={birthDate}/>
+                            <input type="date" onChange={(event) => setBirthDate(event.target.value)} required name="BirthDate" placeholder="BirthDate" value={userState.user.birthDate}/>
                         </label>
                     </div>
 
@@ -103,8 +166,8 @@ const UserEditPage = () => {
                     </div>
 
                     <div className="userEditBtns">
-                        <button className="editBtn">수정하기</button>
-                        <button className="secessionBtn">회원탈퇴</button>
+                        <button className="editBtn" onClick={handleEdit}>수정하기</button>
+                        <button className="secessionBtn" onClick={handledelete}>회원탈퇴</button>
                     </div>
                 </div>
             </div>

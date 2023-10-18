@@ -45,7 +45,7 @@ export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
             <ul className="flex bg-slate-500">
               {links.map(({ href, key }) => (
                   <li className="flex-auto" key={key}>
-                    <Link href={href}>
+                    <Link href={href} className="text-black">
                       {key}
                     </Link>
                   </li>

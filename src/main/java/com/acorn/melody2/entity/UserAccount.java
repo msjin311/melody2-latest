@@ -11,6 +11,7 @@ import java.sql.Date;
 
 
 
+
 @Data
 // Lombok Data 어노테이션: Getter, Setter, ToString 등의 메서드를 자동 생성
 @NoArgsConstructor
@@ -67,6 +68,11 @@ public class UserAccount {
     //데이터베이스 컬럼 이름 지정
     private String userHashtags;
     //사용자 해시태그
+
+    @Column(name = "IsWithdraw")
+    //데이터베이스 컬럼 이름 지정
+    private int isWithdraw;
+    //사용자 탈퇴여부
 
 //    @Column(name = "Prefer_Genre_ID")
 //    private Long preferGenreId;
