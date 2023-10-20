@@ -1,13 +1,13 @@
 "use client"
 
 import "./UserEditPage.css";
-import {useState, useContext} from "react";
+import {useState, useContext, useRef} from "react";
 import {BsCheck, BsX} from "react-icons/bs";
 import {UserContext} from "../../contexts/UserContext";
 
 const UserEditPage = () => {
     const { userState, userDispatch } = useContext(UserContext);
-
+    const profileImageRef = useRef();
 
     const accountId = userState.user.accountId;
     const [name, setName] = useState('');
@@ -18,6 +18,7 @@ const UserEditPage = () => {
     const [password, setPassword] = useState('');
     const [passwordConfirm, setPasswordConfirm] = useState('');
     const [userHashtags, setUserHashtags] = useState('');
+    const [profileImage, setProfileImage] = useState(null);
 
     const userEdit = {
         accountId,
@@ -27,8 +28,10 @@ const UserEditPage = () => {
         gender,
         password,
         userHashtags,
+        profileImage
     };
 
+    //회원정보 수정기능
     const handleEdit =async () => {
         try{
             const response = await fetch(`api/user-accounts/${userState.user.userAccountId}`, {
@@ -53,6 +56,21 @@ const UserEditPage = () => {
         }
     }
 
+    //프로필 이미지 수정기능
+    const handleImageChange = (event) => {
+        const file = event.target.files[0];
+        console.log(file);
+        setProfileImage(file);
+        console.log(setProfileImage)
+    }
+    //프로필 기본이미지 수정기능
+    const handleDefaltImageChange = () => {
+        setProfileImage('')
+        console.log(setProfileImage)
+    }
+
+
+    //회원탈퇴기능
     const handledelete =async () => {
         if (confirm("정말 탈퇴 하시겠습니까?") === true) {
             console.log(userDispatch)
@@ -130,10 +148,27 @@ const UserEditPage = () => {
                 </div>
 
                 <div className="onEditImage">
-                    <div className="userProfileImage-Inner"></div>
+                    <div className="userProfileImage-Inner">
+                        {/*<img*/}
+                        {/*    src={`/images/` + userState.user.profileImage}*/}
+                        {/*/>*/}
+                        {profileImage ? (
+                            <img
+                                src={URL.createObjectURL(profileImage)}
+                            />
+                        ) : (
+                            <img
+                                src={`/images/` + userState.user.profileImage}
+                            />
+                        )}
+                    </div>
                     <div className="imageEditBtn">
-                        <button>기본이미지</button>
-                        <button>찾아보기</button>
+
+                        <button onChange={handleDefaltImageChange}>기본이미지</button>
+                        <label>
+                            이미지선택
+                            <input type="file" onChange={handleImageChange} ref={profileImageRef}/>
+                        </label>
                     </div>
                 </div>
             </div>

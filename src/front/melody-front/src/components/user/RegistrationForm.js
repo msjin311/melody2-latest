@@ -12,7 +12,6 @@ function RegistrationForm() {
     const [password, setPassword] = useState('');
     const [passwordConfirm, setPasswordConfirm] = useState('');
     const [userHashtags, setUserHashtags] = useState('');
-    const [profileImage, setProfileImage] = useState(null);
 
 
     //비밀번호 확인
@@ -84,8 +83,7 @@ function RegistrationForm() {
             email,
             gender,
             password,
-            userHashtags,
-            profileImage
+            userHashtags
         };
         //submit클릭시 입력한 각 데이터를 user라는 객체로 저장함
 
