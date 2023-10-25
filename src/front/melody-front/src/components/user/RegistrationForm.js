@@ -8,7 +8,7 @@ function RegistrationForm() {
     const [accountId, setAccountId] = useState('');
     const [birthDate, setBirthDate] = useState('');
     const [email, setEmail] = useState('');
-    const [gender, setGender] = useState('Male');
+    const [gender, setGender] = useState('');
     const [password, setPassword] = useState('');
     const [passwordConfirm, setPasswordConfirm] = useState('');
     const [userHashtags, setUserHashtags] = useState('');

@@ -182,8 +182,9 @@
 }
 .gender-Inner div {
     display: flex;
+    justify-content: start;
     padding: 10px;
-    gap: 20px;
+    gap: 50px;
 }
 .gender-Inner div label {
     cursor: pointer;

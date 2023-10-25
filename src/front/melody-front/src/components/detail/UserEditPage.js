@@ -14,7 +14,7 @@ const UserEditPage = () => {
     const [name, setName] = useState(userState.user.name);
     const [birthDate, setBirthDate] = useState(userState.user.birthDate);
     const [email, setEmail] = useState(userState.user.email);
-    const [gender, setGender] = useState('Male');
+    const [gender, setGender] = useState(userState.user.gender);
     const [oldpassword, setOldPassword] = useState('');
     const [password, setPassword] = useState('');
     const [passwordConfirm, setPasswordConfirm] = useState('');
@@ -109,6 +109,10 @@ const UserEditPage = () => {
             });
         }else {
             //비밀번호 일치시  input Icon
+            const checkInput = document.querySelectorAll(".check-input");
+            checkInput.forEach((inputBox) => {
+                inputBox.classList.remove("on");
+            });
             const iconX = document.querySelectorAll(".bsicon-x");
             iconX.forEach((xIcon) => {
                 xIcon.classList.remove("on");
