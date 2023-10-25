@@ -56,7 +56,6 @@
     border-radius: 50%;
     position: relative;
     overflow: hidden;
-    padding: 5px;
 }
 .userProfileImage-Inner img {
     position: absolute;

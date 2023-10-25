@@ -62,7 +62,7 @@ public class UserAccount {
 
     @Column(name = "Profile_Image", columnDefinition = "VARCHAR(100) DEFAULT 'default_profile_image.jpg'")
     // 데이터베이스 컬럼 이름 지정 'default_profile_image.jpg'파일을 기본으로지정
-    private String profileImage = "default_profile_image.jpg";
+    private String profileImage;
     //사용자 프로필이미지
 
     @Column(name = "User_Hashtags")

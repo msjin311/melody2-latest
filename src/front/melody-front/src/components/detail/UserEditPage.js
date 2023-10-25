@@ -18,7 +18,7 @@ const UserEditPage = () => {
     const [password, setPassword] = useState('');
     const [passwordConfirm, setPasswordConfirm] = useState('');
     const [userHashtags, setUserHashtags] = useState('');
-    const [profileImage, setProfileImage] = useState(null);
+    const [profileImage, setProfileImage] = useState('');
 
     const userEdit = {
         accountId,
@@ -37,7 +37,7 @@ const UserEditPage = () => {
             const response = await fetch(`api/user-accounts/${userState.user.userAccountId}`, {
                 method : 'PUT',
                 headers : {
-                    'content-Type' : 'application/json',
+                    'Content-Type' : 'application/json',
                 },
                 body : JSON.stringify(userEdit),
             });
@@ -56,15 +56,16 @@ const UserEditPage = () => {
         }
     }
 
-    //프로필 이미지 수정기능
-    const handleImageChange = (event) => {
-        const file = event.target.files[0];
-        console.log(file);
-        setProfileImage(file);
-        console.log(setProfileImage)
+    //프로필 이미지 미리보기
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        const imageUrl = URL.createObjectURL(file);
+        setProfileImage(imageUrl);
+        console.log(imageUrl)
+        console.log(file)
     }
-    //프로필 기본이미지 수정기능
-    const handleDefaltImageChange = () => {
+    //프로필 기본이미지
+    const handleDefaultImageChange = () => {
         setProfileImage('')
         console.log(setProfileImage)
     }
@@ -149,25 +150,21 @@ const UserEditPage = () => {
 
                 <div className="onEditImage">
                     <div className="userProfileImage-Inner">
-                        {/*<img*/}
-                        {/*    src={`/images/` + userState.user.profileImage}*/}
-                        {/*/>*/}
                         {profileImage ? (
                             <img
-                                src={URL.createObjectURL(profileImage)}
+                                src={profileImage}
                             />
                         ) : (
                             <img
-                                src={`/images/` + userState.user.profileImage}
+                                src="../../../public/images/default_profile_image.jpg"
                             />
                         )}
                     </div>
                     <div className="imageEditBtn">
-
-                        <button onChange={handleDefaltImageChange}>기본이미지</button>
+                        <button onChange={handleDefaultImageChange}>기본이미지</button>
                         <label>
                             이미지선택
-                            <input type="file" onChange={handleImageChange} ref={profileImageRef}/>
+                            <input type="file" onChange={handleImageChange} accept="image/*" ref={profileImageRef}/>
                         </label>
                     </div>
                 </div>
