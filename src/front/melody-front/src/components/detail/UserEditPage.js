@@ -4,20 +4,22 @@ import "./UserEditPage.css";
 import {useState, useContext, useRef} from "react";
 import {BsCheck, BsX} from "react-icons/bs";
 import {UserContext} from "../../contexts/UserContext";
+import {equal} from "assert";
 
 const UserEditPage = () => {
     const { userState, userDispatch } = useContext(UserContext);
     const profileImageRef = useRef();
 
+
     const accountId = userState.user.accountId;
-    const [name, setName] = useState('');
+    const [name, setName] = useState(userState.user.name);
     const [birthDate, setBirthDate] = useState(userState.user.birthDate);
-    const [email, setEmail] = useState('');
+    const [email, setEmail] = useState(userState.user.email);
     const [gender, setGender] = useState('Male');
     const [oldpassword, setOldPassword] = useState('');
     const [password, setPassword] = useState('');
     const [passwordConfirm, setPasswordConfirm] = useState('');
-    const [userHashtags, setUserHashtags] = useState('');
+    const [userHashtags, setUserHashtags] = useState(userState.user.userHashtags);
     const [profileImage, setProfileImage] = useState('');
 
     const userEdit = {
@@ -33,8 +35,13 @@ const UserEditPage = () => {
 
     //회원정보 수정기능
     const handleEdit =async () => {
+        //비밀번호 공백일시
+        if(password === '' || password === null) {
+            alert('비밀번호를 입력하세요.')
+            return;
+        }
 
-        //비밀번호 불일치시
+        //비밀번호 불일치시 input
         if(password !== passwordConfirm) {
             const checkInput = document.querySelectorAll(".check-input");
             checkInput.forEach((inputBox) => {
@@ -73,7 +80,7 @@ const UserEditPage = () => {
 
     //비밀번호 확인
     if(password && passwordConfirm !== ""){
-        //비밀번호 불일치
+        //비밀번호 불일치 input Icon
         if(password !== passwordConfirm) {
             const inputCheckIcons = document.querySelectorAll(".input-check-icon");
             inputCheckIcons.forEach((icon) => {
@@ -88,7 +95,7 @@ const UserEditPage = () => {
                 checkIcon.classList.remove("on");
             });
         }else {
-            //비밀번호 일치
+            //비밀번호 일치시  input Icon
             const iconX = document.querySelectorAll(".bsicon-x");
             iconX.forEach((xIcon) => {
                 xIcon.classList.remove("on");
@@ -168,16 +175,19 @@ const UserEditPage = () => {
             <h1>User Edit Page</h1>
             <div className="onEditInputs-Inner">
                 <div className="onEditInputs">
+                    {/* AccountId */}
                     <div className="input-inner">
                         <span>AccountId</span>
                         <div className="accountIdInput-inner">{userState.user.accountId}</div>
                     </div>
 
+                    {/* Name */}
                     <div className="input-inner">
                         <span>Name</span>
                         <input type="text" onChange={(event) => setName(event.target.value)} required placeholder="Name" value={name}/>
                     </div>
 
+                    {/* Current PassWord */}
                     <div className="input-inner">
                         <span>Current PassWord</span>
                         <label className="input-icon-inner" >
@@ -185,6 +195,7 @@ const UserEditPage = () => {
                         </label>
                     </div>
 
+                    {/* New PassWord */}
                     <div className="input-inner">
                         <span>New PassWord</span>
                         <label className="input-icon-inner" >
@@ -192,6 +203,7 @@ const UserEditPage = () => {
                         </label>
                     </div>
 
+                    {/* New PassWord Confirmation */}
                     <div className="input-inner">
                         <span>New PassWord Confirmation</span>
                         <label className="input-icon-inner" >
@@ -206,6 +218,7 @@ const UserEditPage = () => {
                     </div>
                 </div>
 
+                {/* ProfileImage */}
                 <div className="onEditImage">
                     <div className="userProfileImage-Inner">
                         {profileImage ? (
@@ -230,11 +243,14 @@ const UserEditPage = () => {
 
             <div className="underEditInputs-Inner">
                 <div className="underEditInputs">
+
+                    {/* Email */}
                     <div className="input-inner">
                         <span>Email</span>
                         <input type="text" onChange={(event) => setEmail(event.target.value)} required placeholder="Email" value={email}/>
                     </div>
 
+                    {/* BirthDate */}
                     <div className="input-inner">
                         <span>BirthDate</span>
                         <label name="BirthDate">
@@ -242,6 +258,7 @@ const UserEditPage = () => {
                         </label>
                     </div>
 
+                    {/* Gender */}
                     <div className="gender-Inner">
                         <span>Gender</span>
                         <div>
@@ -250,6 +267,7 @@ const UserEditPage = () => {
                         </div>
                     </div>
 
+                    {/* HashTag */}
                     <div className="input-inner">
                         <span>HashTag</span>
                         <input type="text" onChange={(event) => setUserHashtags(event.target.value)} required placeholder="HashTag" value={userHashtags}/>
