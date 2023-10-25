@@ -155,34 +155,43 @@ const UserEditPage = () => {
 
     //회원탈퇴기능
     const handledelete =async () => {
-        if (confirm("정말 탈퇴 하시겠습니까?") === true) {
-            console.log(userDispatch)
-            const userDelete = { ...userState.user,  isWithdraw: 1 };
+        //기존 비밀번호 불일치시
+        if(userState.user.password !== oldpassword){
+            alert('기존 비밀번호가 불일치 합니다.')
+            const oldInput = document.querySelectorAll(".old-input");
+            oldInput.forEach((inputBox) => {
+                inputBox.classList.add("on");
+            });
+        }else{
+            if (confirm("정말 탈퇴 하시겠습니까?") === true) {
+                console.log(userDispatch)
+                const userDelete = { ...userState.user,  isWithdraw: 1 };
 
 
-            try {
-                const response = await fetch(`api/user-accounts/${userState.user.userAccountId}`, {
-                    method: 'PUT',
-                    headers: {
-                        'content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(userDelete),
-                });
+                try {
+                    const response = await fetch(`api/user-accounts/${userState.user.userAccountId}`, {
+                        method: 'PUT',
+                        headers: {
+                            'content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(userDelete),
+                    });
 
-                if (response.ok) {
-                    const userData = await response.json();
-                    console.log(userData);
-                    console.log(userDelete);
-                    userDispatch({ type: 'LOGOUT' });
-                    alert("회원 탈퇴가 완료되었습니다.")
-                    window.location.href = '/login';
-                } else {
-                    console.error('Edit Failed')
-                    console.log(userState.user)
-                    alert("데이터 수정에 실패했습니다.")
+                    if (response.ok) {
+                        const userData = await response.json();
+                        console.log(userData);
+                        console.log(userDelete);
+                        userDispatch({ type: 'LOGOUT' });
+                        alert("회원 탈퇴가 완료되었습니다.")
+                        window.location.href = '/login';
+                    } else {
+                        console.error('Edit Failed')
+                        console.log(userState.user)
+                        alert("데이터 수정에 실패했습니다.")
+                    }
+                } catch (error) {
+                    console.error('error : ', error);
                 }
-            } catch (error) {
-                console.error('error : ', error);
             }
         }
     }
