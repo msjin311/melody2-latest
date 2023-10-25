@@ -33,6 +33,21 @@ const UserEditPage = () => {
 
     //회원정보 수정기능
     const handleEdit =async () => {
+
+        //비밀번호 불일치시
+        if(password !== passwordConfirm) {
+            const checkInput = document.querySelectorAll(".check-input");
+            checkInput.forEach((inputBox) => {
+                inputBox.classList.add("on");
+            });
+            return;
+        }else{
+            const checkInput = document.querySelectorAll(".check-input");
+            checkInput.forEach((inputBox) => {
+                inputBox.classList.remove("on");
+            });
+        }
+
         try{
             const response = await fetch(`api/user-accounts/${userState.user.userAccountId}`, {
                 method : 'PUT',
@@ -54,6 +69,49 @@ const UserEditPage = () => {
         }catch (error) {
             console.error('error : ', error);
         }
+    }
+
+    //비밀번호 확인
+    if(password && passwordConfirm !== ""){
+        //비밀번호 불일치
+        if(password !== passwordConfirm) {
+            const inputCheckIcons = document.querySelectorAll(".input-check-icon");
+            inputCheckIcons.forEach((icon) => {
+                icon.classList.add("show");
+            });
+            const iconX = document.querySelectorAll(".bsicon-x");
+            iconX.forEach((xIcon) => {
+                xIcon.classList.add("on");
+            });
+            const iconCheck = document.querySelectorAll(".bsicon-check");
+            iconCheck.forEach((checkIcon) => {
+                checkIcon.classList.remove("on");
+            });
+        }else {
+            //비밀번호 일치
+            const iconX = document.querySelectorAll(".bsicon-x");
+            iconX.forEach((xIcon) => {
+                xIcon.classList.remove("on");
+            });
+            const iconCheck = document.querySelectorAll(".bsicon-check");
+            iconCheck.forEach((checkIcon) => {
+                checkIcon.classList.add("on");
+            });
+        }
+    }else {
+        //비밀번호 칸이 비어있을경우
+        const inputCheckIcons = document.querySelectorAll(".input-check-icon");
+        inputCheckIcons.forEach((icon) => {
+            icon.classList.remove("show");
+        });
+        const iconX = document.querySelectorAll(".bsicon-x");
+        iconX.forEach((xIcon) => {
+            xIcon.classList.remove("on");
+        });
+        const iconCheck = document.querySelectorAll(".bsicon-check");
+        iconCheck.forEach((checkIcon) => {
+            checkIcon.classList.remove("on");
+        });
     }
 
     //프로필 이미지 미리보기

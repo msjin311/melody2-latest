@@ -28,6 +28,17 @@ const LoginForm = () => {
     }, [userState.user]);
 
     const handleLogin = async () => {
+        console.log(userState.user)
+        console.log(userState.user.isWithdraw)
+
+        // 탈퇴 회원 확인
+        if(userState.user.isWithdraw === 1) {
+            console.log(userState.user)
+            console.log(userState.user.isWithdraw)
+            alert("탈퇴한 유저입니다.");
+            return;
+        }
+
         try {
             // Perform an HTTP POST request to your Spring Boot login endpoint
             const response = await fetch('/api/login', {

@@ -1,3 +1,44 @@
+/* 비밀번호 확인 이미지 */
+.input-icon-inner {
+    position: relative;
+    width: 100%;
+}
+.input-check-icon {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 50%;
+    right: 5%;
+    transform: translateY(-50%);
+    display: none;
+}
+.input-check-icon.show {
+    display: block;
+}
+.bsicon {
+    font-size: 15pt;
+}
+.bsicon-check {
+    color: green;
+    font-weight: bold;
+    display: none;
+}
+.bsicon-check.on {
+    display: block;
+}
+.bsicon-x {
+    color: red;
+    font-weight: bold;
+    display: none;
+}
+.bsicon-x.on {
+    display: block;
+}
+.input-icon-inner .check-input.on {
+    border-bottom: 2px solid red;
+}
+
+/* 페이지 CSS */
 .userEditPage-Inner {
     border: 1px solid #ccc;
     padding: 30px;
@@ -7,6 +48,8 @@
 .userEditPage-Inner h1 {
     margin-bottom: 50px;
 }
+
+/* 위쪽 inputs */
 .onEditInputs-Inner {
     display: flex;
     padding: 0 30px;
@@ -41,6 +84,8 @@
     width: 100%;
     padding: 10px;
 }
+
+/* 프로필 이미지 place */
 .onEditImage {
     display: flex;
     flex-direction: column;
@@ -86,7 +131,6 @@
     border-radius: 5px;
     padding: 5px 10px;
     font-size: 12px;
-    border: 1px solid #000;
     background-color: #000;
     color: #fff;
     transition: 0.2s;
@@ -97,6 +141,8 @@
     color: #000;
     border: 1px solid #aaa;
 }
+
+/* 아래쪽 inputs */
 .underEditInputs-Inner {
     display: flex;
     padding: 0 30px;
@@ -140,6 +186,8 @@
     cursor: pointer;
     display: block;
 }
+
+/* 수정, 탈퇴 버튼 */
 .userEditBtns {
     text-align: right;
 }
