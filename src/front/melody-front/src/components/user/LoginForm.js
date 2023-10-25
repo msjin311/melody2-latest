@@ -3,7 +3,7 @@
 import "./LoginForm.css";
 import {useContext, useEffect, useState} from "react";
 import {UserContext} from "../../contexts/UserContext";
-//import {UserContext} from "../../../contexts/UserContext";
+
 import Link from "next/link";
 
 const LoginForm = () => {
@@ -16,7 +16,6 @@ const LoginForm = () => {
         password,
     }
 
-
     useEffect(() => {
         console.log("isAuthenticated : " + userState.isAuthenticated);
 
@@ -27,37 +26,52 @@ const LoginForm = () => {
 
     }, [userState.user]);
 
-    const handleLogin = async () => {
-        console.log(userState.user)
-        console.log(userState.user.isWithdraw)
-
-        // 탈퇴 회원 확인
-        if(userState.user.isWithdraw === 1) {
-            console.log(userState.user)
-            console.log(userState.user.isWithdraw)
-            alert("탈퇴한 유저입니다.");
-            return;
+    //탈퇴 회원 확인 함수정의
+    const getUserInfo = async (accountId) => {
+        try{
+            const response = await fetch(`/api/userInfo?accountId=${accountId}`);
+            console.log(accountId);
+            if(response.ok) {
+                const data = await response.json();
+                return data;
+            }else {
+                return null;
+            }
+        }catch (error){
+            console.log('error : ', error);
+            return null;
         }
+    }
 
+    const handleLogin = async () => {
         try {
-            // Perform an HTTP POST request to your Spring Boot login endpoint
-            const response = await fetch('/api/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(loginRequest), // Replace with actual user input
-            });
+            // 탈퇴 회원 확인
+            const userInfo = await getUserInfo(accountId);
+            if(userInfo !== null){
+                if(userInfo.isWithdraw === 1){
+                    alert('탈퇴한 회원입니다.');
+                    console.log(userInfo)
+                }else{
+                    // Perform an HTTP POST request to your Spring Boot login endpoint
+                    const response = await fetch('/api/login', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(loginRequest), // Replace with actual user input
+                    });
 
-            if (response.ok) {
-                // Login successful
-                const userData = await response.json();
-                console.log(userData);
-                userDispatch({ type: 'LOGIN', payload: userData });
-                console.log(userState.isAuthenticated);
-            } else {
-                // Handle login error (e.g., show an error message)
-                console.error('Login failed');
+                    if (response.ok) {
+                        // Login successful
+                        const userData = await response.json();
+                        console.log(userData);
+                        userDispatch({ type: 'LOGIN', payload: userData });
+                        console.log(userState.isAuthenticated);
+                    } else {
+                        // Handle login error (e.g., show an error message)
+                        console.error('Login failed');
+                    }
+                }
             }
         } catch (error) {
             // Handle network or other errors
