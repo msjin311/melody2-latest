@@ -1,4 +1,4 @@
-/* 비밀번호 확인 이미지 */
+/********** 비밀번호 확인 이미지 **********/
 .input-icon-inner {
     position: relative;
     width: 100%;
@@ -37,8 +37,11 @@
 .input-icon-inner .check-input.on {
     border-bottom: 2px solid red;
 }
+.input-icon-inner .old-input.on {
+    border-bottom: 2px solid red;
+}
 
-/* 페이지 CSS */
+/********** 페이지 CSS ***********/
 .userEditPage-Inner {
     border: 1px solid #ccc;
     padding: 30px;
@@ -49,7 +52,7 @@
     margin-bottom: 50px;
 }
 
-/* 위쪽 inputs */
+/********** 위쪽 inputs **********/
 .onEditInputs-Inner {
     display: flex;
     padding: 0 30px;
@@ -85,7 +88,7 @@
     padding: 10px;
 }
 
-/* 프로필 이미지 place */
+/********** 프로필 이미지 place **********/
 .onEditImage {
     display: flex;
     flex-direction: column;
@@ -142,7 +145,7 @@
     border: 1px solid #aaa;
 }
 
-/* 아래쪽 inputs */
+/********** 아래쪽 inputs **********/
 .underEditInputs-Inner {
     display: flex;
     padding: 0 30px;
@@ -187,7 +190,7 @@
     display: block;
 }
 
-/* 수정, 탈퇴 버튼 */
+/********** 수정, 탈퇴 버튼 **********/
 .userEditBtns {
     text-align: right;
 }

@@ -4,7 +4,6 @@ import "./UserEditPage.css";
 import {useState, useContext, useRef} from "react";
 import {BsCheck, BsX} from "react-icons/bs";
 import {UserContext} from "../../contexts/UserContext";
-import {equal} from "assert";
 
 const UserEditPage = () => {
     const { userState, userDispatch } = useContext(UserContext);
@@ -41,18 +40,32 @@ const UserEditPage = () => {
             return;
         }
 
-        //비밀번호 불일치시 input
-        if(password !== passwordConfirm) {
-            const checkInput = document.querySelectorAll(".check-input");
-            checkInput.forEach((inputBox) => {
+        //기존 비밀번호 불일치시
+        if(userState.user.password !== oldpassword){
+            alert('기존 비밀번호가 불일치 합니다.')
+            const oldInput = document.querySelectorAll(".old-input");
+            oldInput.forEach((inputBox) => {
                 inputBox.classList.add("on");
             });
             return;
         }else{
-            const checkInput = document.querySelectorAll(".check-input");
-            checkInput.forEach((inputBox) => {
+            const oldInput = document.querySelectorAll(".old-input");
+            oldInput.forEach((inputBox) => {
                 inputBox.classList.remove("on");
             });
+            //비밀번호 불일치시 input
+            if(password !== passwordConfirm) {
+                const checkInput = document.querySelectorAll(".check-input");
+                checkInput.forEach((inputBox) => {
+                    inputBox.classList.add("on");
+                });
+                return;
+            }else{
+                const checkInput = document.querySelectorAll(".check-input");
+                checkInput.forEach((inputBox) => {
+                    inputBox.classList.remove("on");
+                });
+            }
         }
 
         try{
@@ -191,7 +204,7 @@ const UserEditPage = () => {
                     <div className="input-inner">
                         <span>Current PassWord</span>
                         <label className="input-icon-inner" >
-                            <input type="password" onChange={(event) => setOldPassword(event.target.value)} required placeholder="Current PassWord" value={oldpassword}/>
+                            <input type="password" className="old-input" onChange={(event) => setOldPassword(event.target.value)} required placeholder="Current PassWord" value={oldpassword}/>
                         </label>
                     </div>
 
