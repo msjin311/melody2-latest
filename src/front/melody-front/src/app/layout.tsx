@@ -1,6 +1,7 @@
 import './globals.css';
 import { Inter } from 'next/font/google';
 import Link from 'next/link';
+
 import Footer from '../components/global/Footer';
 import { UserContextProvider } from "../contexts/UserContext";
 // import Header from "../components/global/header/Header";
@@ -38,6 +39,14 @@ const links: LinkItem[] = [
     href: '/login',
     key: 'login',
   },
+  {
+    href: '/help/faq',
+    key: '고객센터',
+  },
+  {
+    href: '/admin/administrator',
+    key: '관리자페이지',
+  }
 ];
 
 type RootLayoutProps = {
@@ -46,6 +55,7 @@ type RootLayoutProps = {
 
 export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
   return (
+
     <html lang="en">
     <UserContextProvider>
       <body className={inter.className}>

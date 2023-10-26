@@ -17,13 +17,8 @@ function RegistrationForm() {
 
         // Create a user object with the form data
         const user = {
-            name,
             accountId,
-            birthDate,
-            email,
-            gender,
             password,
-            hashtag
         };
 
         try {
@@ -58,61 +53,15 @@ function RegistrationForm() {
                         <h1 className="text-2xl font-bold mb-4">SIGN UP</h1>
                         <div className="space-y-4">
                             <div>
-                                <label className="block">Name</label>
-                                <input type="text" value={name} onChange={(e) => setName(e.target.value)} required className="w-full rounded border px-3 py-2" />
-                                {/* Add error message div */}
-                            </div>
-
-                            <div>
                                 <label className="block">AccountId</label>
                                 <input type="text" value={accountId} onChange={(e) => setAccountId(e.target.value)} required className="w-full rounded border px-3 py-2" />
                                 {/* Add error message div */}
                             </div>
-
-                            <div>
-                                <label className="block">Birth Date</label>
-                                <input type="date" id="birthDate" value={birthDate} onChange={(e) => setBirthDate(e.target.value)} required className="w-full rounded border px-3 py-2" />
-                                {/* Add error message div */}
-                            </div>
-
-                            <div>
-                                <label className="block">Email</label>
-                                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required className="w-full rounded border px-3 py-2" />
-                                {/* Add error message div */}
-                            </div>
-
-                            <div>
-                                <label className="block">Gender</label>
-                                <div className="space-x-4">
-                                    <label htmlFor="Male">
-                                        <input type="radio" name="gender" value="Male" id="Male" checked={gender === 'Male'} onChange={() => setGender('Male')} />
-                                        <span className="ml-1">Male</span>
-                                    </label>
-                                    <label htmlFor="Female">
-                                        <input type="radio" name="gender" value="Female" id="Female" checked={gender === 'Female'} onChange={() => setGender('Female')} />
-                                        <span className="ml-1">Female</span>
-                                    </label>
-                                </div>
-                            </div>
-
                             <div>
                                 <label className="block">Password</label>
                                 <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required className="w-full rounded border px-3 py-2" />
                                 {/* Add error message div */}
                             </div>
-
-                            <div>
-                                <label className="block">Confirm Password</label>
-                                <input type="password" value={passwordConfirm} onChange={(e) => setPasswordConfirm(e.target.value)} required className="w-full rounded border px-3 py-2" />
-                                {/* Add error message div */}
-                            </div>
-
-                            <div>
-                                <label className="block">Input HashTag</label>
-                                <input type="text" value={hashtag} onChange={(e) => setHashtag(e.target.value)} required className="w-full rounded border px-3 py-2" />
-                                {/* Add error message div */}
-                            </div>
-
                             <div>
                                 <input type="submit" value="SIGN UP" className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 cursor-pointer" />
                             </div>

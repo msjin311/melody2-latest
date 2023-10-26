@@ -1,7 +1,8 @@
 "use client"
-import React from 'react';
+import React, {useContext} from 'react';
 import styled from 'styled-components';
 import Link from "next/link";
+import {UserContext} from "../../../contexts/UserContext";
 
 const HeaderContainer = styled.header`
   //position: fixed;
@@ -163,6 +164,8 @@ const Gnb = styled.div`
 `;
 
 const Header = () => {
+    const { userState, userDispatch } = useContext(UserContext);
+
     return (
         <HeaderContainer>
             <HeaderInner>
@@ -171,7 +174,21 @@ const Header = () => {
                         <Link href="/"></Link>
                     </Logo>
                     <Lnb>
-                        <Link href="/login">LOGIN</Link>
+                        {userState.isAuthenticated ? (
+                            <>
+                                <p className="text-teal-600">Welcome, {userState.user.name}!</p>
+                                <Link
+                                    href="/"
+                                    onMouseUp={() => {
+                                        userDispatch({ type: 'LOGOUT' });
+                                    }}
+                                >
+                                    Log Out
+                                </Link>
+                            </>) : (
+                            <Link href="/login">LOGIN</Link>
+                        )}
+
                         <Link href="/signUp">SIGN UP</Link>
                         <div className="darkmode"></div>
                     </Lnb>
@@ -190,6 +207,8 @@ const Header = () => {
                         <Link href="#genre">Genre</Link>
                         <Link href="#artist">Artist</Link>
                         <Link href="#musicvideo">Music Video</Link>
+                        <Link href="/help/faq">F & Q</Link>
+
                     </Gnb>
                 </Nav>
             </HeaderInner>
