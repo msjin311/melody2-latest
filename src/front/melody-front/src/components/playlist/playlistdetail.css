@@ -1,0 +1,33 @@
+.songlist li div {
+    display: flex;
+}
+
+.songlist li div > span {
+     flex: 1;
+    border-bottom: 1px solid #000;
+    padding: 7px;
+ }
+
+.songlist li div > span:first-child {
+    flex: 0.1;
+    /*border: 1px solid black;*/
+}
+
+.songlist li div > span:last-child {
+    flex: 0.2;
+    /*border: 1px solid black;*/
+}
+
+.songlist li div > span:nth-child(5) {
+    flex: 1.5;
+    /*border: 1px solid black;*/
+}
+
+.songlist li div > span:last-child img {
+    padding: 10px;
+    /*border: 1px solid black;*/
+}
+
+.listIndex{
+    font-weight: bold;
+}

@@ -1,0 +1,25 @@
+.songPlaylist {
+    text-align: center;
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    /*width: 100px;*/
+    /*height: 200px;*/
+    padding: 10px;
+}
+
+.list {
+    display: flex;
+}
+
+.list span:first-child{
+    flex: 0.1;
+}
+
+.list span:last-child {
+    flex: 1;
+}
+
+.div span {
+
+}
