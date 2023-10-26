@@ -33,7 +33,7 @@ function PlaylistDatail( ) {
     console.log("songs",playlist.songs)
 
     const getSongsById = (playlistId) => {
-        axios.get(`/api/playlist/songs/${playlistId}`)
+        axios.get(`/api/playlists/songs/${playlistId}`)
             .then(r =>{
                 console.log(playlistId)
                 if(r.data){
