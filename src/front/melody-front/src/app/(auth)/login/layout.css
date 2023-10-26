@@ -1,0 +1,16 @@
+.containerLogin {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #eee;
+}
+.login {
+    width: 800px;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    box-shadow: 1px 5px 5px #ccc;
+}

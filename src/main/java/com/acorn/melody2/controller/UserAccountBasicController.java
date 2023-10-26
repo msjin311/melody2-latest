@@ -42,6 +42,11 @@ public class UserAccountBasicController {
         UserAccount createdUserAccount = userAccountService.createUserAccount(userAccount);
         return new ResponseEntity<>(createdUserAccount, HttpStatus.CREATED);
     }
+    @PostMapping("/upload")
+    public ResponseEntity<UserAccount> ImageUpload(@RequestBody UserAccount userAccount) {
+        UserAccount createdUserAccount = userAccountService.createUserAccount(userAccount);
+        return new ResponseEntity<>(createdUserAccount, HttpStatus.CREATED);
+    }
 
     @PutMapping("/{id}")
     public ResponseEntity<UserAccount> updateUserAccount(@PathVariable Long id, @RequestBody UserAccount updatedUserAccount) {

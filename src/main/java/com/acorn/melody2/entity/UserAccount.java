@@ -43,9 +43,10 @@ public class UserAccount {
     @Column(name = "User_Hashtags")
     private String userHashtags;
 
-
-//    @Column(name = "Prefer_Genre_ID")
-//    private Long preferGenreId;
+    @Column(name = "IsWithdraw")
+    //데이터베이스 컬럼 이름 지정
+    private int isWithdraw;
+    //사용자 탈퇴여부
 
 //    @ManyToOne
 //    @JoinColumn(name = "Prefer_Genre_ID", referencedColumnName = "Genre_ID", insertable = false, updatable = false)
