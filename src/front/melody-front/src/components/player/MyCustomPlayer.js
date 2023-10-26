@@ -1,8 +1,8 @@
 import React, {useState, useEffect, useRef} from 'react';
 import ReactPlayer from 'react-player';
-import TailwindPlayer from './PlayerUI';
+import PlayerUI from './PlayerUI';
 
-const MyCustomPlayer = ({ song, playlistEl, list, currentSongIndex, setCurrentSongIndex }) => {
+const MyCustomPlayer = ({ song, playlistEl,  playlist, currentSongIndex, setCurrentSongIndex }) => {
 
     const [isPlaying, setIsPlaying] = useState(false);
     const [played, setPlayed] = useState(0);
@@ -53,12 +53,12 @@ const MyCustomPlayer = ({ song, playlistEl, list, currentSongIndex, setCurrentSo
     // Existing logic for play, pause, and more goes here
 
     const handleNextClick = () => {
-        const nextSongIndex = (currentSongIndex + 1) % list.length;
+        const nextSongIndex = (currentSongIndex + 1) % playlist.length;
         setCurrentSongIndex(nextSongIndex);
     };
 
     const handlePreviousClick = () => {
-        const previousSongIndex = (currentSongIndex - 1 + list.length) % list.length;
+        const previousSongIndex = (currentSongIndex - 1 + playlist.length) % playlist.length;
         setCurrentSongIndex(previousSongIndex);
     };
 
@@ -114,14 +114,15 @@ const MyCustomPlayer = ({ song, playlistEl, list, currentSongIndex, setCurrentSo
 
     useEffect(() => {
         // You can add any custom logic here, such as a timer or progress tracking.
-    }, [isPlaying, currentSongIndex, playlistEl, list]);
+    }, [isPlaying, currentSongIndex, playlistEl, playlist]);
 
     return (
         <div>
-            <TailwindPlayer
+            <PlayerUI
                 playlistEl = {playlistEl}
                 isPlaying={isPlaying}
                 handlePlayPause={handlePlayPause}
+                handlePreviousClick={{handlePreviousClick}}
                 handleNextClick={handleNextClick}
                 handlePreviousClick={handlePreviousClick}
                 handleToggleRepeat={handleToggleRepeat}

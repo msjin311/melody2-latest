@@ -10,16 +10,19 @@ const UserEditPage = () => {
     const profileImageRef = useRef();
 
 
-    const accountId = userState.user.accountId;
-    const [name, setName] = useState(userState.user.name);
-    const [birthDate, setBirthDate] = useState(userState.user.birthDate);
-    const [email, setEmail] = useState(userState.user.email);
-    const [gender, setGender] = useState(userState.user.gender);
+    let accountId;
+    const [name, setName] = useState(userState.user ? userState.user.name : '');
+    const [birthDate, setBirthDate] = useState(userState.user ? userState.user.birthDate : '');
+    const [email, setEmail] = useState(userState.user ? userState.user.email : '');
+    const [gender, setGender] = useState(userState.user ? userState.user.gender : '');
     const [oldpassword, setOldPassword] = useState('');
     const [password, setPassword] = useState('');
     const [passwordConfirm, setPasswordConfirm] = useState('');
-    const [userHashtags, setUserHashtags] = useState(userState.user.userHashtags);
+    const [userHashtags, setUserHashtags] = useState(userState.user ? userState.user.userHashtags : '');
     const [profileImage, setProfileImage] = useState('');
+
+
+
 
     const userEdit = {
         accountId,
@@ -32,8 +35,10 @@ const UserEditPage = () => {
         profileImage
     };
 
+
     //회원정보 수정기능
     const handleEdit =async () => {
+        accountId  = userState.user.accountId;
         //비밀번호 공백일시
         if(password === '' || password === null) {
             alert('비밀번호를 입력하세요.')

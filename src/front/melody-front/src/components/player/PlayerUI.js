@@ -163,7 +163,7 @@ export default function Component({
                         <FontAwesomeIcon icon="repeat" style={{ color: "#3d619e" }} />
                     </div>
 
-                    <div className="previous ml-4">
+                    <div className="previous ml-4" onClick={handlePreviousClick}>
                         <FontAwesomeIcon icon="backward" />
                     </div>
 
