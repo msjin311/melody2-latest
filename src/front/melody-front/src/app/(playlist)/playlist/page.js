@@ -35,6 +35,12 @@ function Playlist   () {
     const toggleMenu = (index) => {
         const updatedMenuOpen = [...popMenuOpen];
         updatedMenuOpen[index] = !updatedMenuOpen[index];
+
+        for (let i = 0; i < updatedMenuOpen.length; i++) {
+            if (i !== index) {
+                updatedMenuOpen[i] = false;
+            }
+        }
         setPopupMenuOpen(updatedMenuOpen);
     };
 
