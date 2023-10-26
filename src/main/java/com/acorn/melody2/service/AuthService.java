@@ -6,9 +6,7 @@ import com.acorn.melody2.exception.CustomAuthenticationException;
 import com.acorn.melody2.repository.UserAccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import org.springframework.util.StringUtils;
-
 import java.util.Objects;
 
 @Service
