@@ -1,7 +1,8 @@
 import './RegistrationForm.css';
 import {useState} from "react"
-import {event} from "next/dist/build/output/log";
 import {BsCheck, BsX} from "react-icons/bs"
+import {data} from "autoprefixer";
+
 
 function RegistrationForm() {
     const [name, setName] = useState('');
@@ -12,7 +13,49 @@ function RegistrationForm() {
     const [password, setPassword] = useState('');
     const [passwordConfirm, setPasswordConfirm] = useState('');
     const [userHashtags, setUserHashtags] = useState('');
+    const [userNameList, setUserNameList] = useState([]);
 
+    //기존 유저 accounId목록 가져오기
+    const getAllUserAccounts = async () => {
+        try{
+            const response = await fetch (`/api/user-accounts`);
+            if(response.ok){
+                const data = await response.json();
+                const userNames = await data.map(user => user.name);
+                console.log(userNames);
+                setUserNameList(userNames);
+            }else{
+                return null;
+            }
+        }catch (error){
+            console.log('error : ', error)
+        }
+    }
+    //아이디 중복확인버튼
+    const handleIdCheck = async (event) => {
+        event.preventDefault();
+
+        await getAllUserAccounts();
+        if(accountId === "" || accountId === null){
+            alert('사용할 ID를 입력해주세요.')
+            const accountIdcheckInput = document.querySelectorAll(".accountId-check-input");
+            accountIdcheckInput.forEach((inputBox) => {
+                inputBox.classList.add("on");
+            });
+        }else if(userNameList.includes(accountId)){
+            alert('이미 사용중인 ID입니다.')
+            const accountIdcheckInput = document.querySelectorAll(".accountId-check-input");
+            accountIdcheckInput.forEach((inputBox) => {
+                inputBox.classList.add("on");
+            });
+        }else{
+            alert('사용 가능한 ID입니다.')
+            const accountIdcheckInput = document.querySelectorAll(".accountId-check-input");
+            accountIdcheckInput.forEach((inputBox) => {
+                inputBox.classList.remove("on");
+            });
+        }
+    }
 
     //비밀번호 확인
     if(password && passwordConfirm !== ""){
@@ -57,10 +100,32 @@ function RegistrationForm() {
         });
     }
 
+    //회원가입 버튼
     const signupSubmit = async (event) => {
-        //form에서 submit을 누를시 이벤트가 발생하기위한 함수
-        event.preventDefault();
         //이벤트가 발생시에 페이지가 초기화되는것을 방지함
+        event.preventDefault();
+
+        //아이디 중복체크
+        if(accountId === "" || accountId === null){
+            alert('사용할 ID를 입력해주세요.')
+            const accountIdcheckInput = document.querySelectorAll(".accountId-check-input");
+            accountIdcheckInput.forEach((inputBox) => {
+                inputBox.classList.add("on");
+            });
+            return;
+        }else if(userNameList.includes(accountId)){
+            alert('이미 사용중인 ID입니다.')
+            const accountIdcheckInput = document.querySelectorAll(".accountId-check-input");
+            accountIdcheckInput.forEach((inputBox) => {
+                inputBox.classList.add("on");
+            });
+            return;
+        }else{
+            const accountIdcheckInput = document.querySelectorAll(".accountId-check-input");
+            accountIdcheckInput.forEach((inputBox) => {
+                inputBox.classList.remove("on");
+            });
+        }
 
         //비밀번호 불일치시
         if(password !== passwordConfirm) {
@@ -122,11 +187,17 @@ function RegistrationForm() {
         <div className="section-Inner">
             <form className="signupform" onSubmit={signupSubmit}>
                 <h1>Sign Up</h1>
+
+                {/* AccountId */}
                 <div className="input-inner">
                     <span>AccountId</span>
-                    <input type="text" onChange={(event)=> setAccountId(event.target.value)} required placeholder="AccountId" value={accountId}/>
+                    <div className="accountIdInner">
+                        <input type="text" className="accountId-check-input" onChange={(event)=> setAccountId(event.target.value)} required placeholder="AccountId" value={accountId}/>
+                        <button onClick={handleIdCheck}>중복확인</button>
+                    </div>
                 </div>
 
+                {/* PassWord */}
                 <div className="input-inner">
                     <span>PassWord</span>
                     <label className="input-icon-inner" >
@@ -134,6 +205,7 @@ function RegistrationForm() {
                     </label>
                 </div>
 
+                {/* ConfirmPassWord */}
                 <div className="input-inner">
                     <span>ConfirmPassWord</span>
                     <label className="input-icon-inner" >
@@ -147,11 +219,13 @@ function RegistrationForm() {
                     </label>
                 </div>
 
+                {/* Name */}
                 <div className="input-inner">
                     <span>Name</span>
                     <input type="text" onChange={(event) => setName(event.target.value)} required placeholder="Name" value={name}/>
                 </div>
 
+                {/* BirthDate */}
                 <div className="input-inner">
                     <span>BirthDate</span>
                     <label name="BirthDate">
@@ -159,6 +233,7 @@ function RegistrationForm() {
                     </label>
                 </div>
 
+                {/* Gender */}
                 <div className="gender-Inner">
                     <span>Gender</span>
                     <div>
@@ -167,11 +242,13 @@ function RegistrationForm() {
                     </div>
                 </div>
 
+                {/* Email */}
                 <div className="input-inner">
                     <span>Email</span>
                     <input type="text" onChange={(event) => setEmail(event.target.value)} required placeholder="Email" value={email}/>
                 </div>
 
+                {/* HashTag */}
                 <div className="input-inner">
                     <span>HashTag</span>
                     <input type="text" onChange={(event) => setUserHashtags(event.target.value)} required placeholder="HashTag" value={userHashtags}/>
