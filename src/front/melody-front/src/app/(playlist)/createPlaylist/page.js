@@ -4,13 +4,11 @@ import React, {useContext, useEffect, useState} from 'react';
 import {UserContext} from "../../../contexts/UserContext";
 import { useRouter } from 'next/navigation'
 
-function Playlistform(props) {
-    // Define state variables for form fields
-    // const [userAccountId, setUserAccountId] = useState(0); // useraccount_id를 상태로 변경
-    // const {userAccount, setUserAccount} = useContext(UserAccountContext);
+function PlaylistForm() {
+
+
+
     const { userState, userDispatch } = useContext(UserContext);
-    const userAccount = userState.user
-    const userAccountId = userState.user.userAccountId;
     const [playlistName, setPlaylistName] = useState('');
     const [description, setDescription] = useState('');
     const [createdDate, setCreatedDate] = useState('');
@@ -19,10 +17,10 @@ function Playlistform(props) {
     const router = useRouter();
 
 
-    useEffect(() => {
-        console.log("createPlaylist userAccount object", userAccount);
-        console.log("userAccountId value",userAccountId)
-    }, [userAccount]); // userAccount가 업데이트될 때만 실행됩니다.
+    // useEffect(() => {
+    //     console.log("createPlaylist userAccount object", userAccount);
+    //     console.log("userAccountId value",userAccountId)
+    // }, [userAccount]); // userAccount가 업데이트될 때만 실행됩니다.
 
     useEffect(() => {
         const createdDate = new Date().toISOString().slice(0, 10);
@@ -49,6 +47,8 @@ function Playlistform(props) {
     const handleCreatePlaylist = async (e) => {
         e.preventDefault()
 
+        const userAccountId = userState.user.userAccountId;
+
 
         const playlist = {
             userAccountId,
@@ -68,14 +68,10 @@ function Playlistform(props) {
             });
 
             if(response.ok) {
-                console.log("유저어카운트",props.userAccountId)
-                console.log(playlist)
                 alert('create playlist successfully')
                 router.push('/playlist')
 
             } else {
-                console.log("유저어카운트",props.userAccountId)
-                console.log(playlist)
                 alert('failed playlist Please try again')
             }
 
@@ -128,4 +124,4 @@ function Playlistform(props) {
 }
 
 
-export default Playlistform;
+export default PlaylistForm;

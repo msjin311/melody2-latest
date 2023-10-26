@@ -14,11 +14,7 @@ import CloseImg from "../../../../public/images/close_111152.png";
 import SongPlaylist from "../../../components/playlist/SongPlaylist";
 
 function Playlist   () {
-    // const  userAccount  = useContext(UserAccountContext);
     const { userState, userDispatch } = useContext(UserContext);
-    const userAccount = userState.user
-    const userAccountId = userState.user.userAccountId;
-    const [playlistId, setPlaylistId] = useState(0);
     const [playlistName, setPlaylistName] = useState('');
     const [description, setDescription] = useState('');
     const [createdDate, setCreatedDate] = useState('');
@@ -99,6 +95,7 @@ function Playlist   () {
     }, [playlists]);
 
     const getPlaylistsByUserAccountId = (e) =>{
+        const userAccountId = userState.user.userAccountId;
         axios.get(`/api/playlists/playlist/${userAccountId}`)
             .then(response =>{
                 if(response.data){
@@ -127,7 +124,9 @@ function Playlist   () {
     }
 
     const editPlaylist = (inputPlaylistId) => {
-        const playlistId = inputPlaylistId
+        const playlistId = inputPlaylistId;
+        const userAccount = userState.user;
+        const userAccountId = userState.user.userAccountId;
         console.log(playlistId)
         console.log('이거',inputPlaylistId, typeof inputPlaylistId);
 
