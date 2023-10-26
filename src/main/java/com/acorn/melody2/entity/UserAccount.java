@@ -1,11 +1,12 @@
 package com.acorn.melody2.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Date;
-
+import java.util.List;
 
 
 @Data
@@ -41,6 +42,7 @@ public class UserAccount {
 
     @Column(name = "User_Hashtags")
     private String userHashtags;
+
 
 //    @Column(name = "Prefer_Genre_ID")
 //    private Long preferGenreId;
