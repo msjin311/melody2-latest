@@ -35,6 +35,7 @@ function TestApi() {
             <h1>Test API Page</h1>
             <button onClick={fetchData}>Fetch Data</button>
             {response && <pre>{JSON.stringify(response, null, 2)}</pre>}
+            {console.log(response.body.mp3_url)}
             {response && response.mp3_url && (
                 <ReactPlayer url={response.mp3_url} controls />
             )}
