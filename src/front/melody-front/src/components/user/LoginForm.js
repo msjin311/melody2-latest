@@ -32,8 +32,7 @@ const LoginForm = () => {
             const response = await fetch(`/api/userInfo?accountId=${accountId}`);
             console.log(accountId);
             if(response.ok) {
-                const data = await response.json();
-                return data;
+                return await response.json();
             }else {
                 return null;
             }
