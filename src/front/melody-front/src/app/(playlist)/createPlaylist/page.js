@@ -90,44 +90,38 @@ function Playlistform(props) {
 
     return (
         <>
-            <form onSubmit={handleCreatePlaylist}>
-                <h1>Playlist Create Page</h1>
+            <form onSubmit={handleCreatePlaylist} className="max-w-sm mx-auto p-4 bg-white rounded shadow-md">
+                <h1 className="text-2xl font-bold mb-4">Playlist Create Page</h1>
 
-                {/*<label>유저어카운트 temp</label><br/>*/}
-                {/*<input*/}
-                {/*    type="text"*/}
-                {/*    name="input_playlist_account_id"*/}
-                {/*    onChange={handlePlaylist_useraccount_id}*/}
-                {/*/><br/>*/}
-
-                <label>플레이리스트 이름</label><br/>
+                <label className="block text-sm font-semibold">플레이리스트 이름</label>
                 <input
                     type="text"
                     name="input_playlistName"
                     onChange={handlePlaylist_name}
-                /><br/>
+                    className="w-full p-2 border rounded mb-2"
+                />
 
-                <label>설명</label><br/>
+                <label className="block text-sm font-semibold">설명</label>
                 <input
                     type="text"
                     name="input_description"
                     onChange={handleDescription}
-                /><br/>
+                    className="w-full p-2 border rounded mb-2"
+                />
 
-                <label>해쉬태그</label><br/>
+                <label className="block text-sm font-semibold">해쉬태그</label>
                 <input
                     type="text"
                     name="input_playlist_hashtags"
                     onChange={handlePlaylist_hashtags}
-                /><br/><p/>
+                    className="w-full p-2 border rounded mb-4"
+                />
 
-
-                <input
-                    type="submit"
-                    value="플레이리스트 생성"
-                /><br/>
-
+                <button type="submit" className="w-full bg-teal-500 text-white p-2 rounded hover:bg-teal-600">
+                    플레이리스트 생성
+                </button>
             </form>
+
 
         </>
     );

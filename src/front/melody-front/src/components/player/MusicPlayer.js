@@ -41,6 +41,8 @@ function MusicPlayer({ song = { title: 'Song Title' }, album = { singerName: 'Ar
     const [currentSongIndex, setCurrentSongIndex] = useState(0); // currentSongIndex를 정의하고 초기값 설정
     const [songs, setSongs] = useState(null);
 
+
+
     const loadSongs = async () => {
         try {
             const response = await axios.get('/api/songs');
@@ -49,6 +51,7 @@ function MusicPlayer({ song = { title: 'Song Title' }, album = { singerName: 'Ar
             console.error('Error loading songs:', error);
         }
     };
+
 
     useEffect(() => {
         loadSongs();

@@ -26,14 +26,7 @@ function Playlist   () {
 
     const [playlists, setPlaylists] = useState([]);
 
-    // const playlist = {
-    //     playlistId,
-    //     userAccountId,
-    //     playlistName,
-    //     description,
-    //     createdDate,
-    //     playlistHashtags
-    // };
+
 
     //popup menu sector
     const [popMenuOpen, setPopupMenuOpen] = useState(Array(playlists.length).fill(false));
@@ -86,26 +79,9 @@ function Playlist   () {
         setComponentVisible(!isComponentVisible);
     };
 
-    // useEffect(() => {
-    //     axios.get(`/api/playlist/${userAccountId}`)
-    //         .then(response =>{
-    //             setPlaylists(response.data)
-    //             console.log(playlists);
-    //         })
-    //         .catch (error =>{
-    //             console.error('playlist 리스트 실패', error);
-    //         });
-    // }, [userAccountId]);
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-    // const toggleMenu = () => {
-    //     setIsMenuOpen(!isMenuOpen);
-    // };
-    //
-    // const closeMenu = () => {
-    //     setIsMenuOpen(false);
-    // };
 
     useEffect(() => {
 
@@ -246,49 +222,56 @@ function Playlist   () {
                                                         <div className="EditModal">
                                                             <button onClick={openEditModal}>Edit Playlist</button>
                                                             <EditModal isOpen={editModalOpen} onClose={closeEditModal} playlistId={playlist.playlistId}>
-                                                                <form onSubmit={(e) => {
-                                                                    e.preventDefault(); // 기본 제출 동작을 막음
-                                                                    editPlaylist(playlist.playlistId); // 폼 제출 로직 실행
-                                                                    closeEditModal();
-                                                                }}>
+                                                                <form
+                                                                    onSubmit={(e) => {
+                                                                        e.preventDefault();
+                                                                        editPlaylist(playlist.playlistId);
+                                                                        closeEditModal();
+                                                                    }}
+                                                                    className="bg-white shadow-md rounded px-4 py-4 w-96"
+                                                                >
                                                                     <div className="editmodal-header-grid">
-                                                                        <h1 className="editH">
-                                                                            플레이리스트 수정
-                                                                        </h1>
+                                                                        <h1 className="text-2xl font-bold">플레이리스트 수정</h1>
                                                                         <button onClick={closeEditModal} className="close-button">
                                                                             <Image alt="noimage" src={CloseImg} width={50} height={50} />
                                                                         </button>
                                                                     </div>
-                                                                    <p/>
-                                                                    <div>
-                                                                        <label>이름</label><br/>
+                                                                    <div className="mt-4">
+                                                                        <label className="text-sm font-semibold">이름</label>
                                                                         <input
                                                                             type="text"
                                                                             name="input_playlistName"
                                                                             onChange={handlePlaylist_name}
-                                                                        /><br/>
-
-                                                                        <label>설명</label><br/>
+                                                                            className="w-full p-2 border rounded mt-2"
+                                                                        />
+                                                                    </div>
+                                                                    <div className="mt-4">
+                                                                        <label className="text-sm font-semibold">설명</label>
                                                                         <input
                                                                             type="text"
                                                                             name="input_description"
                                                                             onChange={handleDescription}
-                                                                        /><br/>
-
-                                                                        <label>해쉬태그</label><br/>
+                                                                            className="w-full p-2 border rounded mt-2"
+                                                                        />
+                                                                    </div>
+                                                                    <div className="mt-4">
+                                                                        <label className="text-sm font-semibold">해쉬태그</label>
                                                                         <input
                                                                             type="text"
                                                                             name="input_playlist_hashtags"
                                                                             onChange={handlePlaylist_hashtags}
-                                                                        /><br/><p/>
+                                                                            className="w-full p-2 border rounded mt-2"
+                                                                        />
                                                                     </div>
-                                                                    <div className="editModalBottom">
+                                                                    <div className="mt-4 editModalBottom">
                                                                         <input
                                                                             type="submit"
                                                                             value="저장하기"
-                                                                        /><br/>
+                                                                            className="w-full bg-teal-500 text-white p-2 rounded hover:bg-teal-600"
+                                                                        />
                                                                     </div>
                                                                 </form>
+
                                                             </EditModal>
                                                         </div>
                                                     </li>
