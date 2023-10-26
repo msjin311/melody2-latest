@@ -7,7 +7,7 @@ import { usePathname, useSearchParams } from 'next/navigation'
 import axios from "axios";
 import Image from "next/image";
 import EditModal from "../../../components/playlist/EditPlaylistModal";
-import '../../../components/playlist/Playlistcss.css'
+import '../../../components/playlist/Playlist.css'
 import meatballMenu from '../../../../public/images/meatballs-menu.svg'
 import plusImg from "../../../../public/images/plus.png";
 import CloseImg from "../../../../public/images/close_111152.png";
@@ -197,7 +197,7 @@ function Playlist   () {
             <header className="bg-white p-4 mb-4 shadow grid grid-cols-2">
                 {/* Header content goes here */}
                 <div className="col-span-1">
-                    <h1><b>내 라이브러리</b></h1>
+                    <h1 className="font-bold text-4xl">내 라이브러리</h1>
                 </div>
                 <div className="col-span-1 flex justify-end space-x-4">
                     <Link href="/createPlaylist"><Image alt="noimage" src={plusImg} width={50} height={50}></Image></Link>

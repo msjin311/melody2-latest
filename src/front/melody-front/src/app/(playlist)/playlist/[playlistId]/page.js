@@ -66,7 +66,7 @@ function PlaylistDatail( ) {
             <header className="bg-white p-4 mb-4 shadow grid grid-cols-2">
                 {/* Header content goes here */}
                 <div className="col-span-1">
-                    <h1><b>Playlist Detail Page</b></h1>
+                    <h1 className="font-bold text-4xl">Playlist Detail Page</h1>
                 </div>
                 <div className="col-span-1 flex justify-end space-x-4">
                     <Link href="/createPlaylist"><Image alt="noimage" src={plusImg} width={50} height={50}></Image></Link>
