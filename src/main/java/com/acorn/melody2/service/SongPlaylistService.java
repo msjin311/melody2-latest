@@ -40,6 +40,16 @@ public class SongPlaylistService {
         return songPlaylistRepository.save(songPlaylist);
     }
 
+    public void removeSongFromPlaylist(int playlistId, int songId) {
+        SongPlaylist.SongPlaylistId songPlaylistId = new SongPlaylist.SongPlaylistId(playlistId, songId);
+
+        SongPlaylist songPlaylist = new SongPlaylist();
+        songPlaylist.setPlaylistId(playlistId);
+        songPlaylist.setSongId(songId);
+        songPlaylist.setSongPlaylistId(songPlaylistId);
+        songPlaylistRepository.deleteById(songPlaylistId);
+    }
+
     public SongPlaylist saveSongPlaylist(SongPlaylist songPlaylist) {
         return songPlaylistRepository.save(songPlaylist);
     }

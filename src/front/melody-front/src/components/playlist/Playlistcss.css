@@ -1,0 +1,70 @@
+.button-wrapper {
+    display: flex; /* Flexbox를 사용하여 버튼과 이미지를 같은 라인에 정렬 */
+    /*justify-content: flex-start;*/
+    /*align-items: center; !* 수직 가운데 정렬 *!*/
+    /*팝업창 디자인 위치 수정*/
+    /*position: relative; !* 부모 요소를 relative로 설정 *!*/
+    border-bottom: 1px solid #000;
+    padding: 7px;
+}
+.button-wrapper > * {
+    flex: 1;
+    /*border: 1px solid #000;*/
+}
+
+.button-wrapper div:first-child {
+    flex: 0.1;
+}
+
+.button-meatball {
+    flex: 0.1;
+    margin-left: 10px; /* 버튼과 이미지 사이의 간격 조절 (원하는 간격으로 조정) */
+    position: relative;
+}
+
+/*팝업창 디자인 위치 수정*/
+
+.popup-menu {
+    position: absolute;
+    width: 150px;
+    height: auto;
+    /*top: 0; !* 화면 상단에 위치 *!*/
+    bottom: 100%;
+    /*left: 0; !* 왼쪽에 위치 *!*/
+    right: 70%;
+
+    background-color: #282828; /* 팝업 메뉴 배경색 설정 */
+    border: 1px solid #727272 ; /* 테두리 설정 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* 그림자 효과 추가 */
+    z-index: 1000; /* 다른 요소 위에 나타나도록 설정 */
+    padding: 8px 4px;
+    border-radius: 8px;
+}
+
+/* 스타일 추가 */
+.popup-menu ul {
+    list-style: none;
+    padding: 0;
+}
+
+.popup-menu li {
+    /*margin: 10px 0;*/
+    cursor: pointer;
+    color: hsla(0,0%,100%,.9);
+    width: 100%;
+    padding: 5px;
+    transition: 0.2s;
+}
+
+/* 클릭 가능한 스타일 추가 */
+.popup-menu li:hover {
+    background-color: #413d3d;
+    border-radius: 4px;
+}
+
+.index {
+    font-weight: bold;
+}
+
+
+/* 추가로 스타일을 필요에 따라 조정할 수 있습니다. */

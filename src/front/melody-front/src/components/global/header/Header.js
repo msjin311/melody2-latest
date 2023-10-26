@@ -188,6 +188,7 @@ const Header = () => {
                             </>) : (
                             <Link href="/login">LOGIN</Link>
                         )}
+
                         <Link href="/signUp">SIGN UP</Link>
                         <div className="darkmode"></div>
                     </Lnb>
@@ -207,6 +208,7 @@ const Header = () => {
                         <Link href="#artist">Artist</Link>
                         <Link href="#musicvideo">Music Video</Link>
                         <Link href="/help/faq">F & Q</Link>
+
                     </Gnb>
                 </Nav>
             </HeaderInner>

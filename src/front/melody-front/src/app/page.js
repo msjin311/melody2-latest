@@ -36,6 +36,9 @@ const Home = () => {
             <h1 className="text-2xl mt-4">
                 <Link href="/musicPlayer">music player test </Link>
             </h1>
+            <h1 className="text-2xl mt-4">
+                <Link href="/playlist">musang test </Link>
+            </h1>
 
             <h1 className="text-2xl mt-4">
                 <Link href="/help/faq">help test </Link>
