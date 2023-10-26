@@ -2,6 +2,7 @@
 
 import RegistrationForm from "../../../components/user/RegistrationForm";
 
+
 const Page = () => {
     return (
         <div>

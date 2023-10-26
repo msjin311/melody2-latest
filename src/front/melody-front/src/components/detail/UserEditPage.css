@@ -1,0 +1,222 @@
+/********** 비밀번호 확인 이미지 **********/
+.input-icon-inner {
+    position: relative;
+    width: 100%;
+}
+.input-check-icon {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 50%;
+    right: 5%;
+    transform: translateY(-50%);
+    display: none;
+}
+.input-check-icon.show {
+    display: block;
+}
+.bsicon {
+    font-size: 15pt;
+}
+.bsicon-check {
+    color: green;
+    font-weight: bold;
+    display: none;
+}
+.bsicon-check.on {
+    display: block;
+}
+.bsicon-x {
+    color: red;
+    font-weight: bold;
+    display: none;
+}
+.bsicon-x.on {
+    display: block;
+}
+.input-icon-inner .check-input.on {
+    border-bottom: 2px solid red;
+}
+.input-icon-inner .old-input.on {
+    border-bottom: 2px solid red;
+}
+
+/********** 페이지 CSS ***********/
+.userEditPage-Inner {
+    border: 1px solid #ccc;
+    padding: 30px;
+    width: 1000px;
+    margin: auto;
+}
+.userEditPage-Inner h1 {
+    margin-bottom: 50px;
+}
+
+/********** 위쪽 inputs **********/
+.onEditInputs-Inner {
+    display: flex;
+    padding: 0 30px;
+    padding-bottom: 10px;
+}
+.onEditInputs {
+    display: flex;
+    flex-direction: column;
+    flex: 2;
+    gap: 20px;
+}
+.input-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+.input-inner span {
+    font-weight: bold;
+}
+.accountIdInput-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    padding: 10px;
+    border-bottom: 1px solid #000;
+}
+.onEditInputs .input-inner input {
+    outline: none;
+    border-bottom: 1px solid #000;
+    width: 100%;
+    padding: 10px;
+}
+
+/********** 프로필 이미지 place **********/
+.onEditImage {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+.userProfileImage-Inner {
+    border: 3px solid #aaa;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+}
+.userProfileImage-Inner img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+}
+.imageEditBtn {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+.imageEditBtn label {
+    cursor: pointer;
+    border: 1px solid red;
+    position: relative;
+}
+.imageEditBtn input[type=file] {
+    position: absolute;
+    display: none;
+}
+.imageEditBtn button,
+.imageEditBtn label {
+    border: 1px solid #000;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 12px;
+    background-color: #000;
+    color: #fff;
+    transition: 0.2s;
+}
+.imageEditBtn button:hover,
+.imageEditBtn label:hover {
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #aaa;
+}
+
+/********** 아래쪽 inputs **********/
+.underEditInputs-Inner {
+    display: flex;
+    padding: 0 30px;
+}
+.underEditInputs {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 20px;
+}
+.underEditInputs .input-inner input {
+    outline: none;
+    border-bottom: 1px solid #000;
+    width: 100%;
+    padding: 10px;
+}
+.underEditInputs .input-inner input[type=date] {
+    width: 100%;
+    position: relative;
+}
+.underEditInputs .input-inner input[type=date]::-webkit-calendar-picker-indicator {
+    position: absolute;
+    right: -10px;
+    top: 0;
+    cursor: pointer;
+    transform: translateX(-10px);
+    padding-left: 2900px;
+    padding-right: 20px;
+    padding-top: 15px;
+    height: 100%;
+}
+.gender-Inner span {
+    font-weight: bold;
+}
+.gender-Inner div {
+    display: flex;
+    justify-content: start;
+    padding: 10px;
+    gap: 50px;
+}
+.gender-Inner div label {
+    cursor: pointer;
+    display: block;
+}
+
+/********** 수정, 탈퇴 버튼 **********/
+.userEditBtns {
+    text-align: right;
+}
+.userEditBtns button {
+    padding: 5px 20px;
+    margin: 10px;
+    border-radius: 5px;
+    font-size: 10pt;
+}
+.editBtn {
+    border: 1px solid #000;
+    background-color: #000;
+    color: #fff;
+    transition: 0.2s;
+}
+.editBtn:hover {
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #aaa;
+}
+.secessionBtn {
+    background-color: red;
+    color: #fff;
+    transition: 0.2s;
+}
+.secessionBtn:hover {
+    font-weight: bold;
+}

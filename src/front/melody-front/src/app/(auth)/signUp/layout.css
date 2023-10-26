@@ -1,0 +1,16 @@
+.containersignup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #eee;
+    padding: 50px 0;
+}
+.signup {
+    width: 600px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 1px 5px 5px #ccc;
+}
