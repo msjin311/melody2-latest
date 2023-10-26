@@ -9,11 +9,11 @@ import java.sql.Date;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "board")
+@Table(name = "Board")
 public class Board {
     @Id  //기본키
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "UserAccount_ID")
+    @Column(name = "Board_ID")
     private Long userAccountId;//
 
     @Column(name = "Account_ID", unique = true)

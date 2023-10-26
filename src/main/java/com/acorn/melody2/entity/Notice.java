@@ -9,11 +9,11 @@ import java.sql.Date;
 @Data //자동으로 게터,세터 equals, hashCode, toString 메서드를 구현
 @NoArgsConstructor  // 매개변수 없는 기본 생성자를 자동으로 생성
 @Entity
-@Table(name = "notice")
+@Table(name = "Notice")
 public class Notice {
     @Id  //기본키
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "UserAccount_ID")
+    @Column(name = "Notice_ID")
     private Long userAccountId;//
 
     @Column(name = "Admin_ID")
@@ -27,11 +27,6 @@ public class Notice {
 
     @Column(name = "Registration_Date")
     private Date registrationDate;
-
-
-
-
-
 
 
     // Other album properties and relationships

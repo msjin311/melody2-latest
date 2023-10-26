@@ -1,7 +1,8 @@
 "use client"
-import React from 'react';
+import React, {useContext} from 'react';
 import styled from 'styled-components';
 import Link from "next/link";
+import {UserContext} from "../../../contexts/UserContext";
 
 const HeaderContainer = styled.header`
   //position: fixed;
@@ -163,16 +164,31 @@ const Gnb = styled.div`
 `;
 
 const Header = () => {
+    const { userState, userDispatch } = useContext(UserContext);
+
     return (
         <HeaderContainer>
             <HeaderInner>
                 <Banner>
                     <Logo>
-                        <a href="/"></a>
+                        <Link href="/"></Link>
                     </Logo>
                     <Lnb>
-                        <a href="/login">LOGIN</a>
-                        <a href="/signUp">SIGN UP</a>
+                        {userState.isAuthenticated ? (
+                            <>
+                                <p className="text-teal-600">Welcome, {userState.user.name}!</p>
+                                <Link
+                                    href="/"
+                                    onMouseUp={() => {
+                                        userDispatch({ type: 'LOGOUT' });
+                                    }}
+                                >
+                                    Log Out
+                                </Link>
+                            </>) : (
+                            <Link href="/login">LOGIN</Link>
+                        )}
+                        <Link href="/signUp">SIGN UP</Link>
                         <div className="darkmode"></div>
                     </Lnb>
                 </Banner>
@@ -184,12 +200,12 @@ const Header = () => {
                         </form>
                     </SubLnb>
                     <Gnb>
-                        <a href="#season">Season</a>
-                        <a href="#best">Best</a>
-                        <a href="#new">New</a>
-                        <a href="#genre">Genre</a>
-                        <a href="#artist">Artist</a>
-                        <a href="#musicvideo">Music Video</a>
+                        <Link href="#season">Season</Link>
+                        <Link href="#best">Best</Link>
+                        <Link href="#new">New</Link>
+                        <Link href="#genre">Genre</Link>
+                        <Link href="#artist">Artist</Link>
+                        <Link href="#musicvideo">Music Video</Link>
                         <Link href="/help/faq">F & Q</Link>
                     </Gnb>
                 </Nav>

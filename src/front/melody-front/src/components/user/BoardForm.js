@@ -18,13 +18,7 @@ function BoardForm() {
     const [showInquiryHistory, setShowInquiryHistory] = useState(false);
     const [showInquiryButton, setShowInquiryButton] = useState(false);
 
-    const newBoard = {
-        userAccountId,
-        accountId,
-        title,
-        content,
-        creationDate: creationDate.toISOString().split('T')[0]
-    };
+
     const handleSelectBoardItem = (boardItem) => {
         if (selectedBoardItem === boardItem) {
             setSelectedBoardItem(null); // 이미 선택된 항목을 다시 선택하면 닫힘
@@ -34,6 +28,15 @@ function BoardForm() {
     };
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        // setUserAccountId(userState.user.userAccountId)
+
+        const newBoard = {
+            accountId,
+            title,
+            content,
+            creationDate: creationDate.toISOString().split('T')[0]
+        };
         if (accountId === "로그인되어있지 않음") {
             alert('로그인하셔야 문의하기가 가능합니다.');
             return;
