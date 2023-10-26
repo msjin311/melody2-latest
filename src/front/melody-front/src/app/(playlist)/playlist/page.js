@@ -40,6 +40,25 @@ function Playlist   () {
         setPopupMenuOpen(updatedMenuOpen);
     };
 
+    // 이벤트 핸들러를 사용하여 메뉴 이외의 영역 클릭 시 메뉴 닫기
+    const handleDocumentClick = (e) => {
+        for (let i = 0; i < popMenuOpen.length; i++) {
+            if (popMenuOpen[i]) {
+                closeMenu(i);
+            }
+        }
+    };
+
+    // 페이지가 로드될 때 이벤트 리스너를 등록합니다.
+    React.useEffect(() => {
+        document.addEventListener('click', handleDocumentClick);
+
+        // 컴포넌트가 언마운트 될 때 이벤트 리스너를 제거합니다.
+        return () => {
+            document.removeEventListener('click', handleDocumentClick);
+        };
+    }, [popMenuOpen]);
+
     const closeMenu = (index) => {
         const updatedMenuOpen = [...popMenuOpen];
         updatedMenuOpen[index] = false;
