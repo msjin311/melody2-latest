@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import AdminLayout from "./../../../../components/adminComponent/AdminLayout"
 
-const Page = ({ userAccountId }) => {
+const Page = () => {
     const [comments, setComments] = useState([]);
     const [selectedItems, setSelectedItems] = useState([]);
 
@@ -16,20 +16,20 @@ const Page = ({ userAccountId }) => {
             .catch((err) => {
                 console.error("댓글 데이터를 불러오는 데 실패했습니다.", err);
             });
-    }, [userAccountId]);
+    }, [comments]);
 
-    const toggleSelectRow = (userAccountId) => {
-        if (selectedItems.includes(userAccountId)) {
+    const toggleSelectRow = (commentId) => {
+        if (selectedItems.includes(commentId)) {
             // 이미 선택된 경우, 선택 해제
             setSelectedItems([]);
         } else {
             // 그렇지 않은 경우, 선택
-            setSelectedItems([userAccountId]);
+            setSelectedItems([commentId]);
         }
     };
 
     const deleteSelectedRows = () => {
-        // 선택한 게시물의 userAccountId를 사용하여 서버에 삭제 요청을 보냅니다.
+        // 선택한 게시물의 commentId 사용하여 서버에 삭제 요청을 보냅니다.
         const confirmDelete = window.confirm(
             "답변내역을 \n삭제하시겠습니까?"
         );
@@ -39,7 +39,7 @@ const Page = ({ userAccountId }) => {
         axios.delete(`/api/user-comments/${selectedItems}`)
             .then((res) => {
                 // 삭제 요청이 성공하면 선택한 게시물을 화면에서 제거합니다.
-                setComments(comments.filter((a) => !selectedItems.includes(a.userAccountId)));
+                setComments(comments.filter((a) => !selectedItems.includes(a.commentId)));
                 setComments([]); // 선택 해제
                 console.log("성공")
             })
@@ -66,15 +66,15 @@ const Page = ({ userAccountId }) => {
                     </thead>
                 </table>
                 {comments.map((a) => (
-                    <div key={a.userAccountId}>
+                    <div key={a.commentId}>
                         <table className="w-full border-collapse">
                             <tbody>
                             <tr className="cursor-pointer hover-bg-gray-100">
                                 <td className="py-4" style={{ width: "5%", borderBottom: "1px solid #ddd" }}>
                                     <input
                                         type="checkbox"
-                                        onChange={() => toggleSelectRow(a.userAccountId)}
-                                        checked={selectedItems.includes(a.userAccountId)}
+                                        onChange={() => toggleSelectRow(a.commentId)}
+                                        checked={selectedItems.includes(a.commentId)}
                                     />
                                 </td>
                                 <td className="py-4" style={{ width: "5%", borderBottom: "1px solid #ddd" }}>{a.postId}</td>

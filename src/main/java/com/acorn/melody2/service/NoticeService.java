@@ -30,7 +30,7 @@ public class NoticeService {
     }
 
     public Notice updateNotice(Long id, Notice updatedNotice) {
-        updatedNotice.setUserAccountId(id);
+        updatedNotice.setNoticeId(id);
         return noticeRepository.save(updatedNotice);
     }
 

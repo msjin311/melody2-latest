@@ -16,7 +16,7 @@ function CommentDetail({ boardItem }) {
     }, []);
 
     // boardItem.userAccountId와 일치하는 댓글만 필터링
-    const filteredComments = comments.filter((comment) => comment.postId === boardItem.userAccountId);
+    const filteredComments = comments.filter((comment) => comment.postId === boardItem.boardId);
 
     return (
         <div className="bg-gray-100 p-4">

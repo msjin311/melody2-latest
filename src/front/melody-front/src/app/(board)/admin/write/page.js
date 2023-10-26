@@ -6,7 +6,7 @@ import axios from "axios";
 import Link from "next/link";
 import AdminLayout from "./../../../../components/adminComponent/AdminLayout"
 
-function ReplyForm({ userAccountId }) {
+function ReplyForm() {
     const { userState, userDispatch } = useContext(UserContext);
     const [commentContent, setCommentContent] = useState('');
     const [postId, setPostId] = useState();
@@ -16,14 +16,16 @@ function ReplyForm({ userAccountId }) {
     console.log(userState);
 
     useEffect(() => {
-        setPostId(params.get('userAccountId'))
+        console.log(`params  : ${params}`);
+        console.log(`params get is : ` + params.get('boardId'));
+        setPostId(params.get('boardId'))
     }, []);
 
 
     const commentBoard = {
         postId,
         commentContent,
-        replyStatus: 0
+        replyStatus: 1
     };
 
     useEffect(() => {
@@ -39,9 +41,8 @@ function ReplyForm({ userAccountId }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const postId = params.get('userAccountId');
+        // const postId = params.get('userAccountId');
 
-        console.log(userAccountId)
         try {
             const response = await fetch(`/api/user-comments`, {
                 method: 'POST',

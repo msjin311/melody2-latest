@@ -32,7 +32,7 @@ public class CommentService {
 
     public Comment updateComment(Long id, Comment updatedComment) {
         // 필요한 경우 유효성 검사 또는 비즈니스 로직 추가 가능
-        updatedComment.setUserAccountId(id);
+        updatedComment.setCommentId(id);
         return commentRepository.save(updatedComment);
     }
 

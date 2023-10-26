@@ -32,7 +32,7 @@ public class BoardService {
 
     public Board updateBoard(Long id, Board updatedBoard) {
         // 필요한 경우 유효성 검사 또는 비즈니스 로직 추가 가능
-        updatedBoard.setUserAccountId(id);
+        updatedBoard.setBoardId(id);
         return boardRepository.save(updatedBoard);
     }
 
