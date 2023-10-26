@@ -14,7 +14,7 @@ public class Board {
     @Id  //기본키
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Board_ID")
-    private Long userAccountId;//
+    private Long boardId;//
 
     @Column(name = "Account_ID", unique = true)
     private String accountId;

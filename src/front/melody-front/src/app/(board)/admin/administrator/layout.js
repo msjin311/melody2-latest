@@ -21,18 +21,18 @@ const AdministratorPage = () => {
     if (!notice) {
         return <div>Loading...</div>;
     }
-    const handleCheckboxChange = (userAccountId) => {
-        if (selectedRows.includes(userAccountId)) {
-            setSelectedRows(selectedRows.filter((row) => row !== userAccountId));
+    const handleCheckboxChange = (noticeId) => {
+        if (selectedRows.includes(noticeId)) {
+            setSelectedRows(selectedRows.filter((row) => row !== noticeId));
         } else {
-            setSelectedRows([...selectedRows, userAccountId]);
+            setSelectedRows([...selectedRows, noticeId]);
         }
     };
 
     const handleDeleteSelected = () => {
         axios.delete(`/api/user-notices/${selectedRows}`)
             .then((response) => {
-                setNotice(notice.filter((a) => !selectedRows.includes(a.userAccountId)));
+                setNotice(notice.filter((a) => !selectedRows.includes(a.noticeId)));
                 setSelectedRows([]); // 선택 해제
                 const confirmDelete = window.confirm(
                     "삭제 완료 되었습니다."
@@ -66,14 +66,14 @@ const AdministratorPage = () => {
                     </thead>
                 </table>
                 {notice.map((a, index) => (
-                    <div key={a.userAccountId}>
+                    <div key={a.noticeId}>
                         <table className="w-full border-collapse">
                             <tbody>
                             <tr
                                 className="cursor-pointer hover:bg-gray-100"
                                 onClick={() => {
                                     setIsDetailVisible({ ...isDetailVisible, [index]: !isDetailVisible[index] });
-                                    if (selectedNotice && selectedNotice.userAccountId === a.userAccountId) {
+                                    if (selectedNotice && selectedNotice.noticeId === a.noticeId) {
                                         setSelectedNotice(null);
                                     } else {
                                         setSelectedNotice(a);
@@ -83,18 +83,18 @@ const AdministratorPage = () => {
                                 <td className="p-2" style={{ width: "5%", borderBottom: "1px solid #ddd" }}>
                                     <input
                                         type="checkbox"
-                                        onChange={() => handleCheckboxChange(a.userAccountId)}
-                                        checked={selectedRows.includes(a.userAccountId)}
+                                        onChange={() => handleCheckboxChange(a.noticeId)}
+                                        checked={selectedRows.includes(a.noticeId)}
                                     />
                                 </td>
-                                <td className="py-4" style={{ width: "5%", borderBottom: "1px solid #ddd" }}>{a.userAccountId}</td>
+                                <td className="py-4" style={{ width: "5%", borderBottom: "1px solid #ddd" }}>{a.noticeId}</td>
                                 <td className="py-4" style={{ width: "65%", borderBottom: "1px solid #ddd" }}>{a.noticeTitle}</td>
                                 <td className="py-4" style={{ width: "20%", borderBottom: "1px solid #ddd" }}>{a.registrationDate}</td>
                             </tr>
                             </tbody>
                         </table>
-                        {isDetailVisible[index] && selectedNotice && selectedNotice.userAccountId === a.userAccountId && (
-                            <div className="bg-gray-100 p-4" key={`content-${selectedNotice.userAccountId}`}>
+                        {isDetailVisible[index] && selectedNotice && selectedNotice.noticeId === a.noticeId && (
+                            <div className="bg-gray-100 p-4" key={`content-${selectedNotice.noticeId}`}>
                                 <div className="ml-11 mr-80 text-blue-600">
                                     {selectedNotice?.noticeContent?.split('\n').map((sentence, index) => (
                                         <p key={index} style={{ lineHeight: '2.6' }}>

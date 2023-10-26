@@ -16,7 +16,7 @@ const Page = () => {
             .catch((err) => {
                 console.error("게시판 데이터를 불러오는 데 실패했습니다.", err);
             });
-    }, [userAccountId]);
+    }, [noticeId]);
 
     if (!notice) {
         return <div>Loading...</div>;
@@ -35,21 +35,21 @@ const Page = () => {
                     </thead>
                 </table>
                 {notice.map((a, index) => (
-                    <div key={a.userAccountId}>
+                    <div key={a.noticeId}>
                         <table className="w-full border-collapse">
                             <tbody>
                             <tr
                                 className="cursor-pointer hover:bg-gray-100"
                                 onClick={() => {
                                     setIsDetailVisible({ ...isDetailVisible, [index]: !isDetailVisible[index] });
-                                    if (selectedNotice && selectedNotice.userAccountId === a.userAccountId) {
+                                    if (selectedNotice && selectedNotice.noticeId === a.noticeId) {
                                         setSelectedNotice(null);
                                     } else {
                                         setSelectedNotice(a);
                                     }
                                 }}
                             >
-                                <td className="p-4" style={{ width: "5%", borderBottom: "1px solid #ddd" }}>{a.userAccountId}</td>
+                                <td className="p-4" style={{ width: "5%", borderBottom: "1px solid #ddd" }}>{a.noticeId}</td>
                                 <td className="py-4 px-0" style={{ width: "65%", borderBottom: "1px solid #ddd" }}>{a.noticeTitle}</td>
                                 <td className="py-4 px-0" style={{ width: "17%", borderBottom: "1px solid #ddd" }}>{a.registrationDate}</td>
                                 <td className="py-4 px-0" style={{ width: "5%", borderBottom: "1px solid #ddd" }}>
@@ -58,8 +58,8 @@ const Page = () => {
                             </tr>
                             </tbody>
                         </table>
-                        {isDetailVisible[index] && selectedNotice && selectedNotice.userAccountId === a.userAccountId && (
-                            <div className="bg-gray-100 p-4" key={`content-${selectedNotice.userAccountId}`}>
+                        {isDetailVisible[index] && selectedNotice && selectedNotice.noticeId === a.noticeId && (
+                            <div className="bg-gray-100 p-4" key={`content-${selectedNotice.noticeId}`}>
                                 <div className="ml-11 mr-80 text-blue-600">
                                     {selectedNotice?.noticeContent?.split('\n').map((sentence, index) => (
                                         <p key={index} style={{ lineHeight: '2.6'}}>

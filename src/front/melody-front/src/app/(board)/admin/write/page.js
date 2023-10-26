@@ -16,14 +16,16 @@ function ReplyForm() {
     console.log(userState);
 
     useEffect(() => {
-        setPostId(params.get('userAccountId'))
+        console.log(`params  : ${params}`);
+        console.log(`params get is : ` + params.get('boardId'));
+        setPostId(params.get('boardId'))
     }, []);
 
 
     const commentBoard = {
         postId,
         commentContent,
-        replyStatus: 0
+        replyStatus: 1
     };
 
     useEffect(() => {
@@ -39,9 +41,8 @@ function ReplyForm() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const postId = params.get('userAccountId');
+        // const postId = params.get('userAccountId');
 
-        console.log(userAccountId)
         try {
             const response = await fetch(`/api/user-comments`, {
                 method: 'POST',

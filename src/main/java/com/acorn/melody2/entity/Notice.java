@@ -14,7 +14,7 @@ public class Notice {
     @Id  //기본키
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Notice_ID")
-    private Long userAccountId;//
+    private Long noticeId;//
 
     @Column(name = "Admin_ID")
     private String adminId;

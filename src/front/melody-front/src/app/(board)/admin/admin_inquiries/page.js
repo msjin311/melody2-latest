@@ -24,7 +24,7 @@ const Page = () => {
             .catch((err) => {
                 console.error("댓글 데이터를 불러오는 데 실패했습니다.", err);
             });
-    }, [userAccountId]);
+    }, []);
 
 
     // 병합된 데이터를 저장할 상태 변수
@@ -32,7 +32,7 @@ const Page = () => {
 
     // board 데이터와 comments 데이터를 병합
     board.forEach((boardItem) => {
-        const correspondingComment = comments.find(comment => comment.postId === boardItem.userAccountId);
+        const correspondingComment = comments.find(comment => comment.postId === boardItem.boardId);
         mergedData.push({
             ...boardItem,
             replyStatus: correspondingComment ? correspondingComment.replyStatus : 0,
@@ -56,9 +56,11 @@ const Page = () => {
                         </thead>
                         <tbody>
                         {mergedData.map((data) => (
-                            <tr key={data.userAccountId} className="border-b">
+
+                            <tr key={data.boardId} className="border-b">
+                                {console.log(data)}
                                 <td className="p-2">
-                                    {data.userAccountId}
+                                    {data.boardId}
                                 </td>
                                 <td className="p-4">
                                     <a className="no-underline text-black">{data.content}</a>
@@ -66,7 +68,7 @@ const Page = () => {
                                         href={{
                                             pathname: `write`,
                                             query: {
-                                                userAccountId: data.userAccountId,
+                                                boardId: data.boardId,
                                                 content: data.content,
                                                 title: data.title,
                                                 creationDate: data.creationDate,
