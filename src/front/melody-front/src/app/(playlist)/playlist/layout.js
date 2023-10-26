@@ -47,17 +47,17 @@ const Layout = ({ children }) => {
     return (
 
         <div className="px-4 py-8">
-            <div>
-                <div className={`menu-button ${isMenuOpen ? 'open' : ''}`} onClick={toggleMenu}>
-                    <Image src={menuImg} alt="menu image" width={50}  />
-                </div>
-                <div ref={menuRef} className={`side-menu ${isMenuOpen ? 'open' : ''}`}>
-                    {/* 메뉴 항목들을 추가하세요. */}
-                    <a href="#">메뉴 항목 1</a><br/>
-                    <a href="#">메뉴 항목 2</a><br/>
-                    <a href="#">메뉴 항목 3</a><br/>
-                </div>
-            </div>
+            {/*<div>*/}
+            {/*    <div className={`menu-button ${isMenuOpen ? 'open' : ''}`} onClick={toggleMenu}>*/}
+            {/*        <Image src={menuImg} alt="menu image" width={50}  />*/}
+            {/*    </div>*/}
+            {/*    <div ref={menuRef} className={`side-menu ${isMenuOpen ? 'open' : ''}`}>*/}
+            {/*        /!* 메뉴 항목들을 추가하세요. *!/*/}
+            {/*        <a href="#">메뉴 항목 1</a><br/>*/}
+            {/*        <a href="#">메뉴 항목 2</a><br/>*/}
+            {/*        <a href="#">메뉴 항목 3</a><br/>*/}
+            {/*    </div>*/}
+            {/*</div>*/}
 
             {/* Main Content */}
             <div className="px-4 py-8">

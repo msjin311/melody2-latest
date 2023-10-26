@@ -12,6 +12,7 @@ import meatballMenu from '../../../../public/images/meatballs-menu.svg'
 import plusImg from "../../../../public/images/plus.png";
 import CloseImg from "../../../../public/images/close_111152.png";
 import SongPlaylist from "../../../components/playlist/SongPlaylist";
+import DeleteConfirmationModal from "../../../components/playlist/DeleteConfirmationModal";
 
 function Playlist   () {
     // const  userAccount  = useContext(UserAccountContext);
@@ -168,6 +169,28 @@ function Playlist   () {
 
     }
 
+    //DeleteConfirmation
+    const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(Array(playlists.length).fill(false));
+    const [playlistToDelete, setPlaylistToDelete] = useState(null);
+
+    const handleDeleteClick = (playlistId) => {
+        setPlaylistToDelete(playlistId);
+        const updatedShowConfirmation = [showDeleteConfirmation];
+        updatedShowConfirmation[playlistId] = true;
+        setShowDeleteConfirmation(updatedShowConfirmation);
+    }
+
+    const confirmDelete = () => {
+        if (playlistToDelete !== null) {
+            deletePlaylist(playlistToDelete);
+            setShowDeleteConfirmation(false);
+        }
+    }
+
+    const cancelDelete = () => {
+        setShowDeleteConfirmation(false);
+    }
+
     return (
         <>
             {/* Header */}
@@ -187,8 +210,8 @@ function Playlist   () {
                 <div>
                     <ul>
                         <li>
-                            <div className="button-wrapper index">
-                                <div>#</div>
+                            <div className="button-wrapper index good">
+                                <div className="button-wrapper-first">#</div>
                                 <div>Name</div>
                                 <div>Description</div>
                                 <div>Hashtag</div>
@@ -199,17 +222,22 @@ function Playlist   () {
                             <li key={index} className="">
                                 {/*{playlist.playlistName}*/}
                                 <div className="button-wrapper">
-                                    <div>{index}</div>
+                                    <div className="button-wrapper-first">{index}</div>
                                     <Link
                                         key={index}
                                         href={`/playlist/${playlist.playlistId}`}
                                     >
                                         <div>{playlist.playlistName}</div>
                                     </Link>
+                                    <DeleteConfirmationModal
+                                        isOpen={showDeleteConfirmation[playlist.playlistId]} // Use a specific modal's state
+                                        onConfirm={() => confirmDelete(playlist.playlistId)} // Pass playlistId to identify which playlist to delete
+                                        onCancel={cancelDelete}
+                                        playlistName={playlist.playlistName}
+                                    />
                                     <div>{playlist.description}</div>
                                     <div>{playlist.playlistHashtags}</div>
                                     <SongPlaylist playlistId={playlist.playlistId} />
-
                                     {/*popup*/}
                                     <div className="button-meatball">
                                         <button onClick={() => toggleMenu(index)}>
@@ -228,7 +256,7 @@ function Playlist   () {
                                                                         editPlaylist(playlist.playlistId);
                                                                         closeEditModal();
                                                                     }}
-                                                                    className="bg-white shadow-md rounded px-4 py-4 w-96"
+                                                                    className="bg-white shadow-md rounded px-4 py-4 w-90"
                                                                 >
                                                                     <div className="editmodal-header-grid">
                                                                         <h1 className="text-2xl font-bold">플레이리스트 수정</h1>
@@ -271,12 +299,12 @@ function Playlist   () {
                                                                         />
                                                                     </div>
                                                                 </form>
-
                                                             </EditModal>
                                                         </div>
                                                     </li>
                                                     <li>
-                                                        <span onClick={() => deletePlaylist(playlist.playlistId)}>Delete Playlist</span>
+                                                        {/*<span onClick={() => deletePlaylist(playlist.playlistId)}>Delete Playlist</span>*/}
+                                                        <span onClick={() => handleDeleteClick(playlist.playlistId)}>Delete Playlist</span>
                                                     </li>
                                                 </ul>
                                             </div>

@@ -22,6 +22,7 @@
 
 .list span:hover {
     background: #0056b3;
+    border-radius: 10px;
 }
 
 .div span {
