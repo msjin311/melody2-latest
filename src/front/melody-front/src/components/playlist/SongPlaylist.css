@@ -20,6 +20,10 @@
     flex: 1;
 }
 
+.list span:hover {
+    background: #0056b3;
+}
+
 .div span {
 
 }
