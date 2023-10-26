@@ -1,9 +1,10 @@
 "use client"
 import React from 'react';
 import styled from 'styled-components';
+import Link from "next/link";
 
 const HeaderContainer = styled.header`
-  position: fixed;
+  //position: fixed;
   width: 100%;
   background-color: #eeeded;
   display: flex;
@@ -189,6 +190,7 @@ const Header = () => {
                         <a href="#genre">Genre</a>
                         <a href="#artist">Artist</a>
                         <a href="#musicvideo">Music Video</a>
+                        <Link href="/help/faq">F & Q</Link>
                     </Gnb>
                 </Nav>
             </HeaderInner>
