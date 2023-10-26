@@ -5,7 +5,7 @@ import AdminLayout from "./../../../../components/adminComponent/AdminLayout"
 import axios from "axios";
 import Link from "next/link";
 
-function BoardForm({ userAccountId }) {
+function AdminAnnouncement( ) {
     const { userState, userDispatch } = useContext(UserContext);
     const [adminId, setAdminId] = useState((userState.user && userState.user.accountId)||"로그인되어있지 않음");
     const [noticeTitle, setNoticeTitle] = useState('');
@@ -108,4 +108,4 @@ function BoardForm({ userAccountId }) {
     );
 }
 
-export default BoardForm;
+export default AdminAnnouncement;

@@ -44,6 +44,10 @@ const Home = () => {
                 <Link href="/help/faq">help test </Link>
             </h1>
 
+            <h1 className="text-2xl mt-4">
+                <Link href="/admin/administrator">admin test </Link>
+            </h1>
+
             {/*{userState.isAuthenticated ? (*/}
             {/*    <>*/}
             {/*        <p className="mt-8">Welcome, {userState.user.name}!</p>*/}

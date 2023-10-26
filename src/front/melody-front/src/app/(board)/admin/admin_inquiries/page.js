@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
 import AdminLayout from "./../../../../components/adminComponent/AdminLayout"
-const Page = ({ userAccountId }) => {
+const Page = () => {
     const [board, setBoard] = useState([]);
     const [comments, setComments] = useState([]);
     const [selectedRows, setSelectedRows] = useState([]);

@@ -6,7 +6,7 @@ import axios from "axios";
 import Link from "next/link";
 import AdminLayout from "./../../../../components/adminComponent/AdminLayout"
 
-function ReplyForm({ userAccountId }) {
+function ReplyForm() {
     const { userState, userDispatch } = useContext(UserContext);
     const [commentContent, setCommentContent] = useState('');
     const [postId, setPostId] = useState();

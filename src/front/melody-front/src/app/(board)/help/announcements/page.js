@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import CsLayout from "../../../../components/csComponent/CsLayout";
 
-const Page = ({ userAccountId }) => {
+const Page = () => {
     const [notice, setNotice] = useState(null);
     const [selectedNotice, setSelectedNotice] = useState(null);
     const [isDetailVisible, setIsDetailVisible] = useState({});
