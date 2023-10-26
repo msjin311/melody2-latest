@@ -1,7 +1,6 @@
 import './RegistrationForm.css';
 import {useState} from "react"
 import {BsCheck, BsX} from "react-icons/bs"
-import {data} from "autoprefixer";
 
 
 function RegistrationForm() {
