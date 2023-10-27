@@ -8,8 +8,9 @@ import LikeButton from "../../../components/detail/LikeButton";
 import Link from "next/link";
 import {GoKebabHorizontal} from 'react-icons/go';
 
-function AlbumDetail({albumId}) {
+function AlbumDetail() {
     const {userState, userDispatch} = useContext(UserContext);
+
     const [songs, setSongs] = useState([]);
     const [albums, setAlbums] = useState([]);
     const [artists, setArtists] = useState([]);
@@ -83,12 +84,12 @@ function AlbumDetail({albumId}) {
                 console.error("Failed to fetch songs:", err);
             });
 
-        if (albumId === undefined || albumId === null) {
-            return;
-        }
+        // if (albumId === undefined || albumId === null) {
+        //     return;
+        // }
 
 
-    }, [albumId]);
+    }, []);
 
 
     // Check if albums array is empty before rendering

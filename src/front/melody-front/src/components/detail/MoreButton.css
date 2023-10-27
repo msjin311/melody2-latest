@@ -1,0 +1,65 @@
+.end_section {
+    --swiper-theme-color: #007aff;
+    --swiper-navigation-size: 44px;
+    font-family: -apple-system,BlinkMacSystemFont,AppleSDGothicNeo,Helvetica,맑은 고딕,Malgun Gothic,돋움,Dotum,sans-serif;
+    font-size: 14px;
+    line-height: 1.25em;
+    -webkit-text-size-adjust: none;
+    margin: 0;
+    padding: 0;
+    padding-top: 40px;
+}
+
+h3 {
+    --swiper-theme-color: #007aff;
+    --swiper-navigation-size: 44px;
+    font-family: -apple-system,BlinkMacSystemFont,AppleSDGothicNeo,Helvetica,맑은 고딕,Malgun Gothic,돋움,Dotum,sans-serif;
+    line-height: 1.25em;
+    -webkit-text-size-adjust: none;
+    margin: 0;
+    padding: 0;
+}
+
+.section_title {
+    --swiper-theme-color: #007aff;
+    --swiper-navigation-size: 44px;
+    font-family: -apple-system,BlinkMacSystemFont,AppleSDGothicNeo,Helvetica,맑은 고딕,Malgun Gothic,돋움,Dotum,sans-serif;
+    -webkit-text-size-adjust: none;
+    display: inline-block;
+    padding-bottom: 14px;
+    font-size: 24px;
+    line-height: 30px;
+    font-weight: 700;
+    letter-spacing: -.5px;
+    vertical-align: top;
+}
+
+.lyrics {
+    --swiper-theme-color: #007aff;
+    --swiper-navigation-size: 44px;
+    font-family: -apple-system,BlinkMacSystemFont,AppleSDGothicNeo,Helvetica,맑은 고딕,Malgun Gothic,돋움,Dotum,sans-serif;
+    -webkit-text-size-adjust: none;
+    margin: 0;
+    padding: 0;
+    margin-top: 13px;
+    font-size: 16px;
+    line-height: 27px;
+    letter-spacing: -.2px;
+    white-space: pre-wrap;
+    height: 270px;
+    overflow: hidden;
+}
+
+p {
+    --swiper-theme-color: #007aff;
+    --swiper-navigation-size: 44px;
+    font-family: -apple-system,BlinkMacSystemFont,AppleSDGothicNeo,Helvetica,맑은 고딕,Malgun Gothic,돋움,Dotum,sans-serif;
+    -webkit-text-size-adjust: none;
+    font-size: 16px;
+    line-height: 27px;
+    letter-spacing: -.2px;
+    color: #999;
+    white-space: pre-wrap;
+    margin: 0;
+    padding: 0;
+}
