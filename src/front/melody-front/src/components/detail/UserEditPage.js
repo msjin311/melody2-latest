@@ -9,7 +9,7 @@ const UserEditPage = () => {
     const { userState, userDispatch } = useContext(UserContext);
     const profileImageRef = useRef();
 
-
+    let userAccountId;
     const [accountId, setAccountId] = useState('');
     const [name, setName] = useState('');
     const [birthDate, setBirthDate] = useState('');
@@ -26,6 +26,7 @@ const UserEditPage = () => {
             setEmail(userState.user.email);
             setGender(userState.user.gender);
             setUserHashtags(userState.user.userHashtags);
+            userAccountId =  userState.user.userAccountId;
         }
     }, [userState.user]);
 
@@ -79,6 +80,7 @@ const UserEditPage = () => {
 
     //회원정보 수정기능
     const handleEdit =async () => {
+        userAccountId = userState.user.userAccountId;
         //비밀번호 공백일시
         if(password === '' || password === null) {
             alert('비밀번호를 입력하세요.')
@@ -105,7 +107,7 @@ const UserEditPage = () => {
         }
 
         try{
-            const response = await fetch(`api/user-accounts/${accountId}`, {
+            const response = await fetch(`api/user-accounts/${userAccountId}`, {
                 method : 'PUT',
                 headers : {
                     'Content-Type' : 'application/json',
@@ -148,6 +150,7 @@ const UserEditPage = () => {
 
     //회원탈퇴기능
     const handledelete =async () => {
+        userAccountId = userState.user.userAccountId;
         //기존 비밀번호 불일치시
         if(userState.user?.password !== oldpassword){
             alert('기존 비밀번호가 불일치 합니다.')
@@ -159,7 +162,7 @@ const UserEditPage = () => {
 
 
                 try {
-                    const response = await fetch(`api/user-accounts/${accountId}`, {
+                    const response = await fetch(`api/user-accounts/${userAccountId}`, {
                         method: 'PUT',
                         headers: {
                             'content-Type': 'application/json',

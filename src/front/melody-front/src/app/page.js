@@ -58,6 +58,10 @@ const Home = () => {
                 <Link href="/song">song </Link>
             </h1>
 
+            <h1 className="text-2xl mt-4">
+                <Link href="/artistSearchTest"> duplicate artist search </Link>
+            </h1>
+
 
 
         </div>
