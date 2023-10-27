@@ -177,6 +177,7 @@ const Header = () => {
                         {userState.isAuthenticated ? (
                             <>
                                 <p className="text-teal-600">Welcome, {userState.user.name}!</p>
+                                <Link href="/playlist">playlist</Link>
                                 <Link
                                     href="/"
                                     onMouseUp={() => {
@@ -202,11 +203,11 @@ const Header = () => {
                     </SubLnb>
                     <Gnb>
                         <Link href="#season">Season</Link>
-                        <Link href="#best">Best</Link>
-                        <Link href="#new">New</Link>
-                        <Link href="#genre">Genre</Link>
-                        <Link href="#artist">Artist</Link>
-                        <Link href="#musicvideo">Music Video</Link>
+
+                        <Link href="/bardTest">Chat Bot</Link>
+                        <Link href="/song">Song</Link>
+                        <Link href="/artist">Artist</Link>
+                        <Link href="musicPlayer">Music Player</Link>
                         <Link href="/help/faq">F & Q</Link>
 
                     </Gnb>

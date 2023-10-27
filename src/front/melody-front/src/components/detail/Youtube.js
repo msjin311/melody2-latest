@@ -1,6 +1,11 @@
 import React from 'react';
 
 function VideoPlayer({ videoUrl }) {
+    // Check if videoUrl is null or empty
+    if (!videoUrl) {
+        return <div>유효한 YouTube URL이 아닙니다.</div>;
+    }
+
     const extractVideoID = (url) => {
         const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
         const match = url.match(regExp);
