@@ -246,7 +246,7 @@ function Playlist   () {
                             <li key={index} className="">
                                 {/*{playlist.playlistName}*/}
                                 <div className="button-wrapper">
-                                    <div className="button-wrapper-first">{index}</div>
+                                    <div className="button-wrapper-first">{index + 1}</div>
                                     <Link
                                         key={index}
                                         href={`/playlist/${playlist.playlistId}`}
@@ -261,7 +261,7 @@ function Playlist   () {
                                     />
                                     <div>{playlist.description}</div>
                                     <div>{playlist.playlistHashtags}</div>
-                                    <SongPlaylist playlistId={playlist.playlistId} />
+                                    {/*<SongPlaylist playlistId={playlist.playlistId} />*/}
                                     {/*popup*/}
                                     <div className="button-meatball">
                                         <button onClick={() => toggleMenu(index)}>

@@ -3,6 +3,7 @@
 import React from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import SongPlaylist from "../../components/playlist/SongPlaylist";
+import PlayerPlaylist from "../../components/playlist/PlayerPlaylist";
 // import "./controller-add.css"
 
 export default function Component({
@@ -221,7 +222,8 @@ export default function Component({
                 </div>
                 <div className="flex-1">
                     <div className="">
-                        <SongPlaylist/>
+                        <PlayerPlaylist/>
+                        {/*<SongPlaylist playlistId={4}/>*/}
                     </div>
                 </div>
             </div>

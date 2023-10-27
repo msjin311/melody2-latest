@@ -88,7 +88,7 @@ function PlaylistDatail( ) {
                     {playlist.songs && playlist.songs.map((song, index) => (
                         <li key={index}>
                             <div>
-                                <span>{index}</span>
+                                <span>{index + 1}</span>
                                 <span>{song.title}</span>
                                 <span>{song.artist.groupName}</span>
                                 <span>{song.soloArtist.singerName}</span>

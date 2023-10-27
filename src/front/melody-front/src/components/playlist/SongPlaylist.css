@@ -5,22 +5,29 @@
     /*border-radius: 10px;*/
     /*width: 100px;*/
     height: 510px;
-    padding: 10px
+    padding: 10px;
 }
 
-.list {
+.playlistName {
+    margin-bottom: 10px;
+}
+
+
+.listHover {
     display: flex;
+    width: 100%;
+    height: auto;
 }
 
-.list span:first-child{
+.listHover span:first-child{
     flex: 0.1;
 }
 
-.list span:last-child {
+.listHover span:last-child {
     flex: 1;
 }
 
-.list span:hover {
+.listHover:hover {
     background: #0056b3;
     border-radius: 10px;
 }
