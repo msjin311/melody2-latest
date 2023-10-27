@@ -1,6 +1,7 @@
 import './RegistrationForm.css';
-import {useState} from "react"
+import {useEffect, useState} from "react"
 import {BsCheck, BsX} from "react-icons/bs"
+import {data} from "autoprefixer";
 
 
 function RegistrationForm() {
@@ -12,7 +13,41 @@ function RegistrationForm() {
     const [password, setPassword] = useState('');
     const [passwordConfirm, setPasswordConfirm] = useState('');
     const [userHashtags, setUserHashtags] = useState('');
-    const [userNameList, setUserNameList] = useState([]);
+    const [userAccountIdList, setUserAccountIdList] = useState([]);
+
+    //아이디 공백 및 중복확인시 css 클래스 작업
+    const [isAccountId, setIsAccountId] = useState(false);
+
+    //아이디 중복확인
+    useEffect(() => {
+        // if (accountId !== "" || accountId !== null) {
+        //     setIsAccountId(false);
+        //     if (userNameList.includes(accountId)) {
+        //         setIsAccountId(true);
+        //     } else {
+        //         setIsAccountId(false);
+        //     }
+        // } else {
+        //     setIsAccountId(true);
+        // }
+    }, [userAccountIdList, accountId]);
+
+    //비밀번호 공백 및 중복확인시 css 클래스 작업
+    const [isPasswordMismatch, setIsPasswordMismatch] = useState(false);
+    const [isPasswordMatch, setIsPasswordMatch] = useState(false);
+
+    //비밀번호 중복확인 및 공백확인
+    useEffect(() => {
+        // if (password && passwordConfirm !== "" || password && passwordConfirm !== null){
+        //     if (password !== passwordConfirm) {
+        //         setIsPasswordMismatch(true);
+        //         setIsPasswordMatch(false);
+        //     } else {
+        //         setIsPasswordMismatch(false);
+        //         setIsPasswordMatch(true);
+        //     }
+        // }
+    }, [password, passwordConfirm]);
 
     //기존 유저 accounId목록 가져오기
     const getAllUserAccounts = async () => {
@@ -20,9 +55,9 @@ function RegistrationForm() {
             const response = await fetch (`/api/user-accounts`);
             if(response.ok){
                 const data = await response.json();
-                const userNames = await data.map(user => user.name);
-                console.log(userNames);
-                setUserNameList(userNames);
+                const userAccountIds = await data.map(user => user.accountId);
+                console.log(userAccountIds);
+                setUserAccountIdList(userAccountIds);
             }else{
                 return null;
             }
@@ -37,66 +72,14 @@ function RegistrationForm() {
         await getAllUserAccounts();
         if(accountId === "" || accountId === null){
             alert('사용할 ID를 입력해주세요.')
-            const accountIdcheckInput = document.querySelectorAll(".accountId-check-input");
-            accountIdcheckInput.forEach((inputBox) => {
-                inputBox.classList.add("on");
-            });
-        }else if(userNameList.includes(accountId)){
+            setIsAccountId(true);
+        }else if(userAccountIdList.includes(accountId)){
             alert('이미 사용중인 ID입니다.')
-            const accountIdcheckInput = document.querySelectorAll(".accountId-check-input");
-            accountIdcheckInput.forEach((inputBox) => {
-                inputBox.classList.add("on");
-            });
+            setIsAccountId(true);
         }else{
             alert('사용 가능한 ID입니다.')
-            const accountIdcheckInput = document.querySelectorAll(".accountId-check-input");
-            accountIdcheckInput.forEach((inputBox) => {
-                inputBox.classList.remove("on");
-            });
+            setIsAccountId(false);
         }
-    }
-
-    //비밀번호 확인
-    if(password && passwordConfirm !== ""){
-        //비밀번호 불일치
-        if(password !== passwordConfirm) {
-            const inputCheckIcons = document.querySelectorAll(".input-check-icon");
-            inputCheckIcons.forEach((icon) => {
-                icon.classList.add("show");
-            });
-            const iconX = document.querySelectorAll(".bsicon-x");
-            iconX.forEach((xIcon) => {
-                xIcon.classList.add("on");
-            });
-            const iconCheck = document.querySelectorAll(".bsicon-check");
-            iconCheck.forEach((checkIcon) => {
-                checkIcon.classList.remove("on");
-            });
-        }else {
-            //비밀번호 일치
-            const iconX = document.querySelectorAll(".bsicon-x");
-            iconX.forEach((xIcon) => {
-                xIcon.classList.remove("on");
-            });
-            const iconCheck = document.querySelectorAll(".bsicon-check");
-            iconCheck.forEach((checkIcon) => {
-                checkIcon.classList.add("on");
-            });
-        }
-    }else {
-        //비밀번호 칸이 비어있을경우
-        const inputCheckIcons = document.querySelectorAll(".input-check-icon");
-        inputCheckIcons.forEach((icon) => {
-            icon.classList.remove("show");
-        });
-        const iconX = document.querySelectorAll(".bsicon-x");
-        iconX.forEach((xIcon) => {
-            xIcon.classList.remove("on");
-        });
-        const iconCheck = document.querySelectorAll(".bsicon-check");
-        iconCheck.forEach((checkIcon) => {
-            checkIcon.classList.remove("on");
-        });
     }
 
     //회원가입 버튼
@@ -107,37 +90,23 @@ function RegistrationForm() {
         //아이디 중복체크
         if(accountId === "" || accountId === null){
             alert('사용할 ID를 입력해주세요.')
-            const accountIdcheckInput = document.querySelectorAll(".accountId-check-input");
-            accountIdcheckInput.forEach((inputBox) => {
-                inputBox.classList.add("on");
-            });
+            setIsAccountId(true);
             return;
-        }else if(userNameList.includes(accountId)){
+        }else if(userAccountIdList.includes(accountId)){
             alert('이미 사용중인 ID입니다.')
-            const accountIdcheckInput = document.querySelectorAll(".accountId-check-input");
-            accountIdcheckInput.forEach((inputBox) => {
-                inputBox.classList.add("on");
-            });
+            setIsAccountId(true);
             return;
         }else{
-            const accountIdcheckInput = document.querySelectorAll(".accountId-check-input");
-            accountIdcheckInput.forEach((inputBox) => {
-                inputBox.classList.remove("on");
-            });
+            setIsAccountId(false);
         }
 
         //비밀번호 불일치시
         if(password !== passwordConfirm) {
-            const checkInput = document.querySelectorAll(".check-input");
-            checkInput.forEach((inputBox) => {
-                inputBox.classList.add("on");
-            });
+            alert('새 비밀번호와 비밀번호 확인이 일치하지 않습니다.')
+            setIsPasswordMismatch(true)
             return;
         }else{
-            const checkInput = document.querySelectorAll(".check-input");
-            checkInput.forEach((inputBox) => {
-                inputBox.classList.remove("on");
-            });
+            setIsPasswordMismatch(false)
         }
 
         const user = {
@@ -191,7 +160,14 @@ function RegistrationForm() {
                 <div className="input-inner">
                     <span>AccountId</span>
                     <div className="accountIdInner">
-                        <input type="text" className="accountId-check-input" onChange={(event)=> setAccountId(event.target.value)} required placeholder="AccountId" value={accountId}/>
+                        <input
+                            type="text"
+                            className={isAccountId ? "accountId-check-input on" : "accountId-check-input"}
+                            onChange={(event)=> setAccountId(event.target.value)}
+                            required
+                            placeholder="AccountId"
+                            value={accountId}
+                        />
                         <button onClick={handleIdCheck}>중복확인</button>
                     </div>
                 </div>
@@ -199,21 +175,30 @@ function RegistrationForm() {
                 {/* PassWord */}
                 <div className="input-inner">
                     <span>PassWord</span>
-                    <label className="input-icon-inner" >
-                        <input type="password" onChange={(event) => setPassword(event.target.value)} required placeholder="Password" value={password}/>
-                    </label>
+                    <input type="password" onChange={(event) => setPassword(event.target.value)} required placeholder="Password" value={password}/>
                 </div>
 
                 {/* ConfirmPassWord */}
                 <div className="input-inner">
                     <span>ConfirmPassWord</span>
                     <label className="input-icon-inner" >
-                        <input type="password" className="check-input" onChange={(event) => setPasswordConfirm(event.target.value)} required placeholder="ConfirmPassWord" value={passwordConfirm}/>
+                        <input
+                            type="password"
+                            className={isPasswordMismatch ? "check-input on" : "check-input"}
+                            onChange={(event) => setPasswordConfirm(event.target.value)}
+                            required
+                            placeholder="New PassWord Confirmation"
+                            value={passwordConfirm}
+                        />
                         <span className="input-check-icon">
-                        <BsCheck className="bsicon bsicon-check"/>
+                            <BsCheck
+                                className={isPasswordMatch ? "bsicon-check show" : "bsicon-check"}
+                            />
                         </span>
                         <span className="input-check-icon">
-                        <BsX className="bsicon bsicon-x"/>
+                            <BsX
+                                className={isPasswordMismatch ? "bsicon-x show" : "bsicon-x"}
+                            />
                         </span>
                     </label>
                 </div>
@@ -244,7 +229,7 @@ function RegistrationForm() {
                 {/* Email */}
                 <div className="input-inner">
                     <span>Email</span>
-                    <input type="text" onChange={(event) => setEmail(event.target.value)} required placeholder="Email" value={email}/>
+                    <input type="Email" onChange={(event) => setEmail(event.target.value)} required placeholder="Email" value={email}/>
                 </div>
 
                 {/* HashTag */}

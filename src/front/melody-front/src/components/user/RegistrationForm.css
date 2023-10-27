@@ -21,6 +21,12 @@
     gap: 5px;
     padding: 10px;
 }
+.input-inner input {
+    width: 100%;
+    border-bottom: 1px solid #000;
+    padding: 10px;
+    outline: none;
+}
 
 /* 아이디 중복확인 */
 .accountIdInner {
@@ -50,53 +56,37 @@
     border-bottom: 2px solid red;
 }
 
-/* 비밀번호 확인 */
-.input-icon-inner .check-input.on {
-    border-bottom: 2px solid red;
-}
-.signupform .input-inner input{
-    outline: none;
-    padding: 10px;
-    width: 100%;
+/********** 비밀번호 확인 input change **********/
+.input-inner .check-input {
     border-bottom: 1px solid #000;
 }
+.input-inner .check-input.on {
+    border-bottom: 2px solid red;
+}
+/********** 비밀번호 확인 icon change **********/
 .input-icon-inner {
     position: relative;
-    width: 100%;
 }
-.input-check-icon {
+.input-icon-inner .input-check-icon {
     position: absolute;
-    display: block;
-    width: 20px;
-    height: 20px;
     top: 50%;
-    right: 5%;
+    right: 2%;
     transform: translateY(-50%);
+}
+.input-icon-inner .input-check-icon .bsicon-check,
+.input-icon-inner .input-check-icon .bsicon-x {
     display: none;
 }
-.input-check-icon.show {
+.input-icon-inner .input-check-icon .bsicon-check.show,
+.input-icon-inner .input-check-icon .bsicon-x.show {
     display: block;
 }
-.bsicon {
-    font-size: 15pt;
-}
-.bsicon-check {
+.input-icon-inner .input-check-icon .bsicon-check {
     color: green;
-    font-weight: bold;
-    display: none;
 }
-.bsicon-check.on {
-    display: block;
-}
-.bsicon-x {
+.input-icon-inner .input-check-icon .bsicon-x {
     color: red;
-    font-weight: bold;
-    display: none;
 }
-.bsicon-x.on {
-    display: block;
-}
-
 
 .signupform .input-inner input[type=date] {
     border: 1px solid #000;

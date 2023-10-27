@@ -10,7 +10,7 @@ function BoardForm() {
     const [accountId, setAccountId] = useState((userState.user && userState.user.accountId)||"로그인되어있지 않음");
     const [title, setTitle] = useState('결제/해지/환불');
     const [content, setContent] = useState('');
-    const [userAccountId, setUserAccountId] = useState('');
+
     const [creationDate, setCreationDate] = useState(new Date());
     const [board, setBoard] = useState([]);
     const [selectedRows, setSelectedRows] = useState([null]);
@@ -90,17 +90,17 @@ function BoardForm() {
         return <div>Loading...</div>;
     }
     // 체크박스 변경을 처리하는 함수
-    const handleCheckboxChange = (userAccountId) => {
-        if (selectedRows.includes(userAccountId)) {
+    const handleCheckboxChange = (boardId) => {
+        if (selectedRows.includes(boardId)) {
             // 이미 선택된 경우, 선택 해제
             setSelectedRows([]);
         } else {
             // 그렇지 않은 경우, 선택
-            setSelectedRows([userAccountId]);
+            setSelectedRows([boardId]);
         }
     };
     const handleDeleteSelectedRows = () => {
-        // 선택한 게시물의 userAccountId를 사용하여 서버에 삭제 요청을 보냅니다.
+        // 선택한 게시물의 boardId 사용하여 서버에 삭제 요청을 보냅니다.
         const confirmDelete = window.confirm(
             "문의내역이 삭제되면 답변을 받을 수 없습니다. \n삭제하시겠습니까?"
         );
@@ -110,7 +110,7 @@ function BoardForm() {
         // 서버로 삭제 요청을 보냅니다.
         axios.delete(`/api/user-boards/${selectedRows}`)
             .then((response) => {
-                setBoard(board.filter((a) => !selectedRows.includes(a.userAccountId)));
+                setBoard(board.filter((a) => !selectedRows.includes(a.boardId)));
                 setSelectedRows([]); // 선택 해제
                 const confirmDelete = window.confirm(
                     "삭제 완료 되었습니다."
@@ -224,8 +224,8 @@ function BoardForm() {
                                 <td className="p-4" style={{ borderTop: '1px solid #ddd', borderBottom: '1px solid #ddd' }}>
                                     <input
                                         type="checkbox"
-                                        onChange={() => handleCheckboxChange(boardItem.userAccountId)}
-                                        checked={selectedRows.includes(boardItem.userAccountId)}
+                                        onChange={() => handleCheckboxChange(boardItem.boardId)}
+                                        checked={selectedRows.includes(boardItem.boardId)}
                                     />
                                 </td>
                                 <td className="p-4" style={{ width: "70%",  borderTop: "1px solid #ddd", borderBottom: "1px solid #ddd" }}>{boardItem.content}</td>

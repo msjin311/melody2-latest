@@ -1,7 +1,7 @@
 "use client"
 
 import "./UserEditPage.css";
-import {useState, useContext, useRef} from "react";
+import {useState, useContext, useRef, useEffect} from "react";
 import {BsCheck, BsX} from "react-icons/bs";
 import {UserContext} from "../../contexts/UserContext";
 
@@ -10,19 +10,21 @@ const UserEditPage = () => {
     const profileImageRef = useRef();
 
 
-    let accountId;
-    const [name, setName] = useState(userState.user ? userState.user.name : '');
-    const [birthDate, setBirthDate] = useState(userState.user ? userState.user.birthDate : '');
-    const [email, setEmail] = useState(userState.user ? userState.user.email : '');
-    const [gender, setGender] = useState(userState.user ? userState.user.gender : '');
+    const accountId = userState.user.accountId;
+    const [name, setName] = useState(userState.user.name);
+    const [birthDate, setBirthDate] = useState(userState.user.birthDate);
+    const [email, setEmail] = useState(userState.user.email);
+    const [gender, setGender] = useState(userState.user.gender);
     const [oldpassword, setOldPassword] = useState('');
     const [password, setPassword] = useState('');
     const [passwordConfirm, setPasswordConfirm] = useState('');
-    const [userHashtags, setUserHashtags] = useState(userState.user ? userState.user.userHashtags : '');
+    const [userHashtags, setUserHashtags] = useState(userState.user.userHashtags);
     const [profileImage, setProfileImage] = useState('');
 
-
-
+    //비밀번호 공백 및 중복확인시 css 클래스 작업
+    const [isPasswordMismatch, setIsPasswordMismatch] = useState(false);
+    const [isPasswordMatch, setIsPasswordMatch] = useState(false);
+    const [isOldPasswordMismatch, setIsOldPasswordMismatch] = useState(false);
 
     const userEdit = {
         accountId,
@@ -35,42 +37,57 @@ const UserEditPage = () => {
         profileImage
     };
 
+    //비밀번호 중복확인 및 공백확인
+    useEffect(() => {
+        // if (password && passwordConfirm !== "" || password && passwordConfirm !== null){
+        //     if (password !== passwordConfirm) {
+        //         setIsPasswordMismatch(true);
+        //         setIsPasswordMatch(false);
+        //     } else {
+        //         setIsPasswordMismatch(false);
+        //         setIsPasswordMatch(true);
+        //     }
+        // }
+    }, [password, passwordConfirm]);
+
+    //기존 비밀번호 확인
+    useEffect(() => {
+        // if (oldpassword !== '') {
+        //     if (userState.user.password !== oldpassword) {
+        //         setIsOldPasswordMismatch(true);
+        //     } else {
+        //         setIsOldPasswordMismatch(false);
+        //     }
+        // } else {
+        //     setIsOldPasswordMismatch(false);
+        // }
+    }, [oldpassword, userState.user.password]);
 
     //회원정보 수정기능
     const handleEdit =async () => {
-        accountId  = userState.user.accountId;
         //비밀번호 공백일시
         if(password === '' || password === null) {
             alert('비밀번호를 입력하세요.')
+            setIsPasswordMismatch(true);
             return;
         }
 
-        //기존 비밀번호 불일치시
-        if(userState.user.password !== oldpassword){
-            alert('기존 비밀번호가 불일치 합니다.')
-            const oldInput = document.querySelectorAll(".old-input");
-            oldInput.forEach((inputBox) => {
-                inputBox.classList.add("on");
-            });
+        //회원정보 수정시 변경할 비밀번호 2차확인
+        if (password !== passwordConfirm) {
+            alert('새 비밀번호와 비밀번호 확인이 일치하지 않습니다.')
+            setIsPasswordMismatch(true);
+            setIsPasswordMatch(false);
             return;
-        }else{
-            const oldInput = document.querySelectorAll(".old-input");
-            oldInput.forEach((inputBox) => {
-                inputBox.classList.remove("on");
-            });
-            //비밀번호 불일치시 input
-            if(password !== passwordConfirm) {
-                const checkInput = document.querySelectorAll(".check-input");
-                checkInput.forEach((inputBox) => {
-                    inputBox.classList.add("on");
-                });
-                return;
-            }else{
-                const checkInput = document.querySelectorAll(".check-input");
-                checkInput.forEach((inputBox) => {
-                    inputBox.classList.remove("on");
-                });
-            }
+        } else {
+            setIsPasswordMismatch(false);
+            setIsPasswordMatch(true);
+        }
+
+        //회원정보 수정시 기존 비밀번호 확인
+        if (userState.user.password !== oldpassword) {
+            alert('기존 비밀번호를 정확히 입력해주세요.')
+            setIsOldPasswordMismatch(true);
+            return;
         }
 
         try{
@@ -96,65 +113,22 @@ const UserEditPage = () => {
         }
     }
 
-    //비밀번호 확인
-    if(password && passwordConfirm !== ""){
-        //비밀번호 불일치 input Icon
-        if(password !== passwordConfirm) {
-            const inputCheckIcons = document.querySelectorAll(".input-check-icon");
-            inputCheckIcons.forEach((icon) => {
-                icon.classList.add("show");
-            });
-            const iconX = document.querySelectorAll(".bsicon-x");
-            iconX.forEach((xIcon) => {
-                xIcon.classList.add("on");
-            });
-            const iconCheck = document.querySelectorAll(".bsicon-check");
-            iconCheck.forEach((checkIcon) => {
-                checkIcon.classList.remove("on");
-            });
-        }else {
-            //비밀번호 일치시  input Icon
-            const checkInput = document.querySelectorAll(".check-input");
-            checkInput.forEach((inputBox) => {
-                inputBox.classList.remove("on");
-            });
-            const iconX = document.querySelectorAll(".bsicon-x");
-            iconX.forEach((xIcon) => {
-                xIcon.classList.remove("on");
-            });
-            const iconCheck = document.querySelectorAll(".bsicon-check");
-            iconCheck.forEach((checkIcon) => {
-                checkIcon.classList.add("on");
-            });
-        }
-    }else {
-        //비밀번호 칸이 비어있을경우
-        const inputCheckIcons = document.querySelectorAll(".input-check-icon");
-        inputCheckIcons.forEach((icon) => {
-            icon.classList.remove("show");
-        });
-        const iconX = document.querySelectorAll(".bsicon-x");
-        iconX.forEach((xIcon) => {
-            xIcon.classList.remove("on");
-        });
-        const iconCheck = document.querySelectorAll(".bsicon-check");
-        iconCheck.forEach((checkIcon) => {
-            checkIcon.classList.remove("on");
-        });
-    }
 
     //프로필 이미지 미리보기
     const handleImageChange = (e) => {
         const file = e.target.files[0];
-        const imageUrl = URL.createObjectURL(file);
-        setProfileImage(imageUrl);
-        console.log(imageUrl)
-        console.log(file)
+        if(file) {
+            const imageUrl = URL.createObjectURL(file);
+            setProfileImage(imageUrl);
+        }else {
+            return;
+        }
     }
     //프로필 기본이미지
-    const handleDefaultImageChange = () => {
-        setProfileImage('')
-        console.log(setProfileImage)
+    const handleDefaultImageChange = (event) => {
+        event.preventDefault();
+        setProfileImage('');
+        console.log(profileImage)
     }
 
 
@@ -163,10 +137,7 @@ const UserEditPage = () => {
         //기존 비밀번호 불일치시
         if(userState.user.password !== oldpassword){
             alert('기존 비밀번호가 불일치 합니다.')
-            const oldInput = document.querySelectorAll(".old-input");
-            oldInput.forEach((inputBox) => {
-                inputBox.classList.add("on");
-            });
+            setIsOldPasswordMismatch(true);
         }else{
             if (confirm("정말 탈퇴 하시겠습니까?") === true) {
                 console.log(userDispatch)
@@ -221,9 +192,14 @@ const UserEditPage = () => {
                     {/* Current PassWord */}
                     <div className="input-inner">
                         <span>Current PassWord</span>
-                        <label className="input-icon-inner" >
-                            <input type="password" className="old-input" onChange={(event) => setOldPassword(event.target.value)} required placeholder="Current PassWord" value={oldpassword}/>
-                        </label>
+                        <input
+                            type="password"
+                            className={isOldPasswordMismatch ? "old-input on" : "old-input"}
+                            onChange={(event) => setOldPassword(event.target.value)}
+                            required
+                            placeholder="Current PassWord"
+                            value={oldpassword}
+                        />
                     </div>
 
                     {/* New PassWord */}
@@ -238,13 +214,24 @@ const UserEditPage = () => {
                     <div className="input-inner">
                         <span>New PassWord Confirmation</span>
                         <label className="input-icon-inner" >
-                            <input type="password" className="check-input" onChange={(event) => setPasswordConfirm(event.target.value)} required placeholder="New PassWord Confirmation" value={passwordConfirm}/>
+                            <input
+                                type="password"
+                                className={isPasswordMismatch ? "check-input on" : "check-input"}
+                                onChange={(event) => setPasswordConfirm(event.target.value)}
+                                required
+                                placeholder="New PassWord Confirmation"
+                                value={passwordConfirm}
+                            />
                             <span className="input-check-icon">
-                        <BsCheck className="bsicon bsicon-check"/>
-                        </span>
+                                <BsCheck
+                                    className={isPasswordMatch ? "bsicon-check show" : "bsicon-check"}
+                                />
+                            </span>
                             <span className="input-check-icon">
-                        <BsX className="bsicon bsicon-x"/>
-                        </span>
+                                <BsX
+                                    className={isPasswordMismatch ? "bsicon-x show" : "bsicon-x"}
+                                />
+                            </span>
                         </label>
                     </div>
                 </div>
@@ -258,16 +245,16 @@ const UserEditPage = () => {
                             />
                         ) : (
                             <img
-                                src="../../../public/images/default_profile_image.jpg"
+                                src='../../../public/images/default_profile_image.jpg'
                             />
                         )}
                     </div>
                     <div className="imageEditBtn">
-                        <button onChange={handleDefaultImageChange}>기본이미지</button>
                         <label>
                             이미지선택
                             <input type="file" onChange={handleImageChange} accept="image/*" ref={profileImageRef}/>
                         </label>
+                        <button onClick={handleDefaultImageChange}>이미지삭제</button>
                     </div>
                 </div>
             </div>
@@ -278,7 +265,7 @@ const UserEditPage = () => {
                     {/* Email */}
                     <div className="input-inner">
                         <span>Email</span>
-                        <input type="text" onChange={(event) => setEmail(event.target.value)} required placeholder="Email" value={email}/>
+                        <input type="Email" onChange={(event) => setEmail(event.target.value)} required placeholder="Email" value={email}/>
                     </div>
 
                     {/* BirthDate */}
