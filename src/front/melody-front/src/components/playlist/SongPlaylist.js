@@ -35,7 +35,7 @@ function SongPlaylist({playlistId}) {
     return(
         <>
             <div className="songPlaylist">
-                <span>Test Song Playlist</span>
+                <span>Playlist</span>
                 {playlist.songs && playlist.songs.map((song, index) => (
                     <ul key={index}>
                         <div className="list">

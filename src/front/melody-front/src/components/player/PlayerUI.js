@@ -37,7 +37,7 @@ export default function Component({
 
     return (
         <div className="min-h-screen bg-gradient-to-r from-purple-300 via-pink-200 to-red-200 dark:from-gray-900 dark:via-gray-800 dark:to-gray-700 flex items-center justify-center">
-            <div className="flex w-full max-w-md mx-auto bg-white shadow-md rounded-lg overflow-hidden dark:bg-zinc-900">
+            <div className="flex mx-auto bg-white shadow-md rounded-lg overflow-hidden dark:bg-zinc-900">
                 {/*                 */}
                 <div className="flex-1">
                     <div className="flex justify-between items-center px-6 py-4 w-3/4">
@@ -220,7 +220,7 @@ export default function Component({
                     </div>
                 </div>
                 <div className="flex-1">
-                    <div className="w-full max-w-md">
+                    <div className="">
                         <SongPlaylist/>
                     </div>
                 </div>
