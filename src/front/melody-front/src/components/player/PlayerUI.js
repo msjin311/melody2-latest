@@ -212,13 +212,9 @@ export default function Component({
                             <FontAwesomeIcon icon="shuffle" />
                         </div>
                     </div>
-                    <style jsx>{`
-                        .ml-16 {
-                            margin-left: 3.5rem !important;
-                        }
-                    `}</style>
-
                 </div>
+
+
             </div>
         </div>
     )

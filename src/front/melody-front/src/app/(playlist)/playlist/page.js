@@ -7,11 +7,12 @@ import { usePathname, useSearchParams } from 'next/navigation'
 import axios from "axios";
 import Image from "next/image";
 import EditModal from "../../../components/playlist/EditPlaylistModal";
-import '../../../components/playlist/Playlistcss.css'
+import '../../../components/playlist/Playlist.css'
 import meatballMenu from '../../../../public/images/meatballs-menu.svg'
 import plusImg from "../../../../public/images/plus.png";
 import CloseImg from "../../../../public/images/close_111152.png";
 import SongPlaylist from "../../../components/playlist/SongPlaylist";
+import DeleteConfirmationModal from "../../../components/playlist/DeleteConfirmationModal";
 
 function Playlist   () {
     const { userState, userDispatch } = useContext(UserContext);
@@ -30,8 +31,33 @@ function Playlist   () {
     const toggleMenu = (index) => {
         const updatedMenuOpen = [...popMenuOpen];
         updatedMenuOpen[index] = !updatedMenuOpen[index];
+
+        for (let i = 0; i < updatedMenuOpen.length; i++) {
+            if (i !== index) {
+                updatedMenuOpen[i] = false;
+            }
+        }
         setPopupMenuOpen(updatedMenuOpen);
     };
+
+    // 이벤트 핸들러를 사용하여 메뉴 이외의 영역 클릭 시 메뉴 닫기
+    const handleDocumentClick = (e) => {
+        for (let i = 0; i < popMenuOpen.length; i++) {
+            if (popMenuOpen[i]) {
+                closeMenu(i);
+            }
+        }
+    };
+
+    // 페이지가 로드될 때 이벤트 리스너를 등록합니다.
+    React.useEffect(() => {
+        document.addEventListener('click', handleDocumentClick);
+
+        // 컴포넌트가 언마운트 될 때 이벤트 리스너를 제거합니다.
+        return () => {
+            document.removeEventListener('click', handleDocumentClick);
+        };
+    }, [popMenuOpen]);
 
     const closeMenu = (index) => {
         const updatedMenuOpen = [...popMenuOpen];
@@ -167,13 +193,35 @@ function Playlist   () {
 
     }
 
+    //DeleteConfirmation
+    const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(Array(playlists.length).fill(false));
+    const [playlistToDelete, setPlaylistToDelete] = useState(null);
+
+    const handleDeleteClick = (playlistId) => {
+        setPlaylistToDelete(playlistId);
+        const updatedShowConfirmation = [showDeleteConfirmation];
+        updatedShowConfirmation[playlistId] = true;
+        setShowDeleteConfirmation(updatedShowConfirmation);
+    }
+
+    const confirmDelete = () => {
+        if (playlistToDelete !== null) {
+            deletePlaylist(playlistToDelete);
+            setShowDeleteConfirmation(false);
+        }
+    }
+
+    const cancelDelete = () => {
+        setShowDeleteConfirmation(false);
+    }
+
     return (
         <>
             {/* Header */}
             <header className="bg-white p-4 mb-4 shadow grid grid-cols-2">
                 {/* Header content goes here */}
                 <div className="col-span-1">
-                    <h1><b>내 라이브러리</b></h1>
+                    <h1 className="font-bold text-4xl">내 라이브러리</h1>
                 </div>
                 <div className="col-span-1 flex justify-end space-x-4">
                     <Link href="/createPlaylist"><Image alt="noimage" src={plusImg} width={50} height={50}></Image></Link>
@@ -186,8 +234,8 @@ function Playlist   () {
                 <div>
                     <ul>
                         <li>
-                            <div className="button-wrapper index">
-                                <div>#</div>
+                            <div className="button-wrapper index good">
+                                <div className="button-wrapper-first">#</div>
                                 <div>Name</div>
                                 <div>Description</div>
                                 <div>Hashtag</div>
@@ -198,17 +246,22 @@ function Playlist   () {
                             <li key={index} className="">
                                 {/*{playlist.playlistName}*/}
                                 <div className="button-wrapper">
-                                    <div>{index}</div>
+                                    <div className="button-wrapper-first">{index + 1}</div>
                                     <Link
                                         key={index}
                                         href={`/playlist/${playlist.playlistId}`}
                                     >
                                         <div>{playlist.playlistName}</div>
                                     </Link>
+                                    <DeleteConfirmationModal
+                                        isOpen={showDeleteConfirmation[playlist.playlistId]} // Use a specific modal's state
+                                        onConfirm={() => confirmDelete(playlist.playlistId)} // Pass playlistId to identify which playlist to delete
+                                        onCancel={cancelDelete}
+                                        playlistName={playlist.playlistName}
+                                    />
                                     <div>{playlist.description}</div>
                                     <div>{playlist.playlistHashtags}</div>
-                                    <SongPlaylist playlistId={playlist.playlistId} />
-
+                                    {/*<SongPlaylist playlistId={playlist.playlistId} />*/}
                                     {/*popup*/}
                                     <div className="button-meatball">
                                         <button onClick={() => toggleMenu(index)}>
@@ -227,7 +280,7 @@ function Playlist   () {
                                                                         editPlaylist(playlist.playlistId);
                                                                         closeEditModal();
                                                                     }}
-                                                                    className="bg-white shadow-md rounded px-4 py-4 w-96"
+                                                                    className="bg-white shadow-md rounded px-4 py-4 w-90"
                                                                 >
                                                                     <div className="editmodal-header-grid">
                                                                         <h1 className="text-2xl font-bold">플레이리스트 수정</h1>
@@ -270,12 +323,12 @@ function Playlist   () {
                                                                         />
                                                                     </div>
                                                                 </form>
-
                                                             </EditModal>
                                                         </div>
                                                     </li>
                                                     <li>
-                                                        <span onClick={() => deletePlaylist(playlist.playlistId)}>Delete Playlist</span>
+                                                        {/*<span onClick={() => deletePlaylist(playlist.playlistId)}>Delete Playlist</span>*/}
+                                                        <span onClick={() => handleDeleteClick(playlist.playlistId)}>Delete Playlist</span>
                                                     </li>
                                                 </ul>
                                             </div>

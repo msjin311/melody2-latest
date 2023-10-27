@@ -1,26 +1,25 @@
 "use client"
 
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
+import  { UserContext }  from "../../contexts/UserContext";
 import { useRouter } from 'next/navigation'
 import axios from "axios";
 import "./SongPlaylist.css"
 
-function SongPlaylist({playlistId}) {
-
+function SongPlaylist() {
+    const { userState, userDispatch } = useContext(UserContext);
     const [songId, setSongId] = useState(0);
-    const [playlist, setPlaylist] = useState([]);
+    const [playlists, setPlaylists] = useState([]);
     const [songs, setSongs] = useState([]);
 
-    const getSongsById = (input) => {
-        const playlistId = input
-        axios.get(`/api/playlists/songs/${playlistId}`)
+    const getSongsById = () => {
+        axios.get(`/api/playlists/playlist/${userState.user.userAccountId}`)
             .then(r =>{
-                console.log(playlistId)
                 if(r.data){
-                    setPlaylist(r.data);
+                    setPlaylists(r.data);
                     console.log('data',r.data);
                 } else{
-
+                    console.log('실패')
                 }
                 console.log('playlist 리스트업 성공')
             })
@@ -30,8 +29,13 @@ function SongPlaylist({playlistId}) {
     }
 
     useEffect(() => {
-        getSongsById(playlistId)
-    }, [playlistId]);
+        getSongsById()
+    }, []);
+
+    useEffect(() => {
+        // playlists가 변경될 때마다 로그를 출력합니다.
+        console.log("playlists",playlists);
+    }, [playlists]);  // playlists가 변경될 때마다 로그가 출력됩니다.
 
     return(
         <>
@@ -39,12 +43,12 @@ function SongPlaylist({playlistId}) {
                 <div className="playlistName">
                     <h1>Playlist</h1>
                 </div>
-                {playlist.songs && playlist.songs.map((song, index) => (
+                {playlists.map((playlists, index) => (
                     <ul key={index}>
                         <div className="list">
                             <div className="listHover">
-                                <span>{index + 1}</span>
-                                <span>{song.title}</span>
+                                <span>{playlists.playlistId}</span>
+                                <span>{playlists.playlistName}</span>
                             </div>
                         </div>
                     </ul>

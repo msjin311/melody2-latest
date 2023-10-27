@@ -12,10 +12,12 @@
     /*border: 1px solid #000;*/
 }
 
-.button-wrapper div:first-child {
+.button-wrapper .button-wrapper-first {
     flex: 0.1;
 }
-
+.DeleteConfirmationModal {
+    border: 1px solid red;
+}
 .button-meatball {
     flex: 0.1;
     margin-left: 10px; /* 버튼과 이미지 사이의 간격 조절 (원하는 간격으로 조정) */
