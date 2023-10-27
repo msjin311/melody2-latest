@@ -48,16 +48,14 @@ const Home = () => {
                 <Link href="/admin/administrator">admin test </Link>
             </h1>
 
-            {/*{userState.isAuthenticated ? (*/}
-            {/*    <>*/}
-            {/*        <p className="mt-8">Welcome, {userState.user.name}!</p>*/}
-            {/*        <p className="mt-4">Welcome, {userState.user.email}!</p>*/}
-            {/*    </>*/}
-            {/*) : (*/}
-            {/*    <>*/}
-            {/*        <p className="mt-8">No login yet</p>*/}
-            {/*    </>*/}
-            {/*)}*/}
+            <h1 className="text-2xl mt-4">
+                <Link href="/album">album </Link>
+            </h1>
+            <h1 className="text-2xl mt-4">
+                <Link href="/artist">artist </Link>
+            </h1>
+
+
 
         </div>
 
