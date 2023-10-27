@@ -124,7 +124,6 @@ const MyCustomPlayer = ({ song, playlistEl,  playlist, currentSongIndex, setCurr
                 handlePlayPause={handlePlayPause}
                 handlePreviousClick={{handlePreviousClick}}
                 handleNextClick={handleNextClick}
-                handlePreviousClick={handlePreviousClick}
                 handleToggleRepeat={handleToggleRepeat}
                 handleToggleShuffle={handleToggleShuffle}
                 handleVolumeChange={handleVolumeChange}

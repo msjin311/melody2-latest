@@ -10,15 +10,29 @@ const UserEditPage = () => {
     const profileImageRef = useRef();
 
 
-    const accountId = userState.user.accountId;
-    const [name, setName] = useState(userState.user.name);
-    const [birthDate, setBirthDate] = useState(userState.user.birthDate);
-    const [email, setEmail] = useState(userState.user.email);
-    const [gender, setGender] = useState(userState.user.gender);
+    const [accountId, setAccountId] = useState('');
+    const [name, setName] = useState('');
+    const [birthDate, setBirthDate] = useState('');
+    const [email, setEmail] = useState('');
+    const [gender, setGender] = useState('');
+    const [userHashtags, setUserHashtags] = useState('');
+
+    useEffect(() => {
+        // Once userState.user is available, populate accountId and other fields
+        if (userState.user) {
+            setAccountId(userState.user.accountId);
+            setName(userState.user.name);
+            setBirthDate(userState.user.birthDate);
+            setEmail(userState.user.email);
+            setGender(userState.user.gender);
+            setUserHashtags(userState.user.userHashtags);
+        }
+    }, [userState.user]);
+
+
     const [oldpassword, setOldPassword] = useState('');
     const [password, setPassword] = useState('');
     const [passwordConfirm, setPasswordConfirm] = useState('');
-    const [userHashtags, setUserHashtags] = useState(userState.user.userHashtags);
     const [profileImage, setProfileImage] = useState('');
 
     //비밀번호 공백 및 중복확인시 css 클래스 작업
@@ -38,30 +52,30 @@ const UserEditPage = () => {
     };
 
     //비밀번호 중복확인 및 공백확인
-    useEffect(() => {
-        // if (password && passwordConfirm !== "" || password && passwordConfirm !== null){
-        //     if (password !== passwordConfirm) {
-        //         setIsPasswordMismatch(true);
-        //         setIsPasswordMatch(false);
-        //     } else {
-        //         setIsPasswordMismatch(false);
-        //         setIsPasswordMatch(true);
-        //     }
-        // }
-    }, [password, passwordConfirm]);
+    // useEffect(() => {
+    //     // if (password && passwordConfirm !== "" || password && passwordConfirm !== null){
+    //     //     if (password !== passwordConfirm) {
+    //     //         setIsPasswordMismatch(true);
+    //     //         setIsPasswordMatch(false);
+    //     //     } else {
+    //     //         setIsPasswordMismatch(false);
+    //     //         setIsPasswordMatch(true);
+    //     //     }
+    //     // }
+    // }, [password, passwordConfirm]);
 
     //기존 비밀번호 확인
-    useEffect(() => {
-        // if (oldpassword !== '') {
-        //     if (userState.user.password !== oldpassword) {
-        //         setIsOldPasswordMismatch(true);
-        //     } else {
-        //         setIsOldPasswordMismatch(false);
-        //     }
-        // } else {
-        //     setIsOldPasswordMismatch(false);
-        // }
-    }, [oldpassword, userState.user.password]);
+    // useEffect(() => {
+    //     // if (oldpassword !== '') {
+    //     //     if (userState.user.password !== oldpassword) {
+    //     //         setIsOldPasswordMismatch(true);
+    //     //     } else {
+    //     //         setIsOldPasswordMismatch(false);
+    //     //     }
+    //     // } else {
+    //     //     setIsOldPasswordMismatch(false);
+    //     // }
+    // }, [oldpassword, userState.user.password]);
 
     //회원정보 수정기능
     const handleEdit =async () => {
@@ -84,14 +98,14 @@ const UserEditPage = () => {
         }
 
         //회원정보 수정시 기존 비밀번호 확인
-        if (userState.user.password !== oldpassword) {
-            alert('기존 비밀번호를 정확히 입력해주세요.')
+        if (userState.user?.password !== oldpassword) {
+            alert('기존 비밀번호를 정확히 입력해주세요.');
             setIsOldPasswordMismatch(true);
             return;
         }
 
         try{
-            const response = await fetch(`api/user-accounts/${userState.user.userAccountId}`, {
+            const response = await fetch(`api/user-accounts/${accountId}`, {
                 method : 'PUT',
                 headers : {
                     'Content-Type' : 'application/json',
@@ -135,7 +149,7 @@ const UserEditPage = () => {
     //회원탈퇴기능
     const handledelete =async () => {
         //기존 비밀번호 불일치시
-        if(userState.user.password !== oldpassword){
+        if(userState.user?.password !== oldpassword){
             alert('기존 비밀번호가 불일치 합니다.')
             setIsOldPasswordMismatch(true);
         }else{
@@ -145,7 +159,7 @@ const UserEditPage = () => {
 
 
                 try {
-                    const response = await fetch(`api/user-accounts/${userState.user.userAccountId}`, {
+                    const response = await fetch(`api/user-accounts/${accountId}`, {
                         method: 'PUT',
                         headers: {
                             'content-Type': 'application/json',
@@ -177,10 +191,9 @@ const UserEditPage = () => {
             <h1>User Edit Page</h1>
             <div className="onEditInputs-Inner">
                 <div className="onEditInputs">
-                    {/* AccountId */}
                     <div className="input-inner">
                         <span>AccountId</span>
-                        <div className="accountIdInput-inner">{userState.user.accountId}</div>
+                        <div className="accountIdInput-inner">{accountId}</div>
                     </div>
 
                     {/* Name */}
@@ -272,7 +285,7 @@ const UserEditPage = () => {
                     <div className="input-inner">
                         <span>BirthDate</span>
                         <label name="BirthDate">
-                            <input type="date" onChange={(event) => setBirthDate(event.target.value)} required name="BirthDate" placeholder="BirthDate" value={userState.user.birthDate}/>
+                            <input type="date" onChange={(event) => setBirthDate(event.target.value)} required name="BirthDate" placeholder="BirthDate" value={birthDate}/>
                         </label>
                     </div>
 
