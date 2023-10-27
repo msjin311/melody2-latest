@@ -5,12 +5,13 @@ import ReactPlayer from "react-player";
 function TestApi() {
     const [response, setResponse] = useState(null);
     const [audioUrl, setAudioUrl] = useState(null);
+    const [question, setQuestion] = useState('');
 
 
     const fetchData = async () => {
         try {
             const dataToSend = {
-                "question" : "비 오는데 노래 추천좀 해줘 한 3곡 정도 한국 곡으로만"
+                "question" : question
             };
 
             const res = await fetch('https://mqco97wso7.execute-api.ap-northeast-2.amazonaws.com/bard-api/api/getBardAnswer', {
@@ -44,6 +45,12 @@ function TestApi() {
     return (
         <div>
             <h1>Test API Page</h1>
+            <input
+                type="text"
+                placeholder="Enter your question"
+                value={question}
+                onChange={(e) => setQuestion(e.target.value)} // Update the question state
+            />
             <button onClick={fetchData}>Fetch Data</button>
             {response && <pre>{JSON.stringify(response, null, 2)}</pre>}
             {response &&  (

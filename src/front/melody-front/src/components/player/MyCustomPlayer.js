@@ -13,6 +13,7 @@ const MyCustomPlayer = ({ song, playlistEl,  playlist, currentSongIndex, setCurr
     const [seeking, setSeeking] = useState(false);
     const [currentTime, setCurrentTime] = useState(0);
     const [duration, setDuration] = useState(0);
+    const [prevVolume, setPrevVolume] = useState(50); // default previous volume
 
     const audioPlayerRef = useRef(null);
 
@@ -82,6 +83,17 @@ const MyCustomPlayer = ({ song, playlistEl,  playlist, currentSongIndex, setCurr
         setIsMuted(!isMuted);
     };
 
+    // const handleToggleMute = () => {
+    //     if (isMuted) {
+    //         setIsMuted(false);
+    //         setVolume(prevVolume);
+    //     } else {
+    //         setIsMuted(true);
+    //         setPrevVolume(volume); // store the current volume before muting
+    //         setVolume(0); // Mute the volume by setting it to 0
+    //     }
+    // };
+
     const handleVolumeChange = (e) => {
         const newVolume = e.target.value;
 
@@ -122,7 +134,7 @@ const MyCustomPlayer = ({ song, playlistEl,  playlist, currentSongIndex, setCurr
                 playlistEl = {playlistEl}
                 isPlaying={isPlaying}
                 handlePlayPause={handlePlayPause}
-                handlePreviousClick={{handlePreviousClick}}
+                handlePreviousClick={handlePreviousClick}
                 handleNextClick={handleNextClick}
                 handleToggleRepeat={handleToggleRepeat}
                 handleToggleShuffle={handleToggleShuffle}
@@ -151,7 +163,7 @@ const MyCustomPlayer = ({ song, playlistEl,  playlist, currentSongIndex, setCurr
                 onPause={() => setIsPlaying(false)} // Update isPlaying when paused
                 onProgress={handleProgress} // Listen to the progress event
                 onDuration={handleDuration} // Listen to the duration event
-                handleVolumeChange={handleVolumeChange}
+                // handleVolumeChange={handleVolumeChange}
 
             />
 

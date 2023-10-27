@@ -1,4 +1,3 @@
-
 .controls {
     display: flex;
     position: relative;
@@ -6,7 +5,6 @@
     font-size: 0.8em;
     justify-content: center;
     color: #89a9a9;
-    margin-top: 60px;
     text-align: center;
     cursor: pointer;
 }
@@ -24,10 +22,10 @@
     font-size: 0.8em;
 }
 
-.controls .volume {
+.controls .volume2 {
     right: 250px;
     position: absolute;
-    font-size: 0.8em;
+    font-size: 0.4em;
 }
 
 .controls .volumeCtrl {
@@ -41,6 +39,9 @@
     display: flex;
     flex-flow: column wrap;
     /*align-items: center;*/
+    margin-top: -30px;
+    margin-left: -133px;
+
 }
 
 .controls .volumeCtrl.hidden {
@@ -57,36 +58,56 @@
     overflow: hidden;
 }
 
-.controls .volumeRange {
-    appearance: none;
-    width: 83px;
+.volumeRange {
+    /*appearance: none;*/
+    /*width: 83px;*/
+    /*position: absolute;*/
+    /*right: 0;*/
+    /*top: -11px;*/
+    /*background: transparent;*/
+    /*transform-origin: center right;*/
+    /*transform: rotate(270deg);*/
+    /*overflow: hidden;*/
+    /*cursor: pointer;*/
+
+    -webkit-appearance: slider-vertical;
+    width: 8px;
     position: absolute;
-    right: 0;
-    top: -11px;
-    background: transparent;
-    transform-origin: center right;
-    transform: rotate(270deg);
-    overflow: hidden;
-    cursor: pointer;
+    right: 247px;
+    top: 25px;
 }
 
-.controls .volumeRange:focus {
+.volumeRange:focus {
     outline: none;
 }
 
-.controls .volumeRange::-webkit-slider-runnable-track {
+.volumeRange::-webkit-slider-runnable-track {
     width: 100%;
     height: 100%;
     border-radius: 2px;
 }
 
-.controls .volumeRange::-webkit-slider-thumb {
+.volumeRange::-webkit-slider-thumb {
+    /*appearance: none;*/
+    /*width: 6px;*/
+    /*height: 15px;*/
+    /*border-radius: 50%;*/
+    /*background: white;*/
+    /*box-shadow: -100vw 0 0 100vw rgb(128, 128, 128);*/
+
+    -webkit-appearance: none;
     appearance: none;
-    width: 6px;
-    height: 15px;
-    border-radius: 50%;
-    background: white;
-    box-shadow: -100vw 0 0 100vw rgb(128, 128, 128);
+    width: 16px;
+    height: 16px;
+    background: #4fd1c5;
+    cursor: pointer;
+}
+
+.volumeRange::-webkit-slider-thumb:hover {
+    background: #38b2ac;
+}
+.volumeRange::-webkit-slider-thumb:active {
+    background: #38b2ac;
 }
 
 .controls .mute {
