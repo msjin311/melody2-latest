@@ -45,6 +45,9 @@
 }
 .userEditPage-Inner h1 {
     margin-bottom: 50px;
+    font-size: 30pt;
+    font-weight: bold;
+    padding: 15px;
 }
 
 /********** 위쪽 inputs **********/

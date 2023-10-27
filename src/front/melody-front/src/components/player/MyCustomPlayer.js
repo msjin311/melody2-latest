@@ -151,6 +151,7 @@ const MyCustomPlayer = ({ song, playlistEl,  playlist, currentSongIndex, setCurr
                 onPause={() => setIsPlaying(false)} // Update isPlaying when paused
                 onProgress={handleProgress} // Listen to the progress event
                 onDuration={handleDuration} // Listen to the duration event
+                handleVolumeChange={handleVolumeChange}
 
             />
 

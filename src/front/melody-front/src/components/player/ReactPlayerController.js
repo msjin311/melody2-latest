@@ -12,6 +12,7 @@ function ReactPlayerController({
                       setVolume,
                       isMuted,
                       handleToggleMute,
+                      handleVolumeChange,
                   }) {
     return (
         <div className="controls">

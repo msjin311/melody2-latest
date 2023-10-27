@@ -4,9 +4,11 @@ const myPageLayout = ({children}) => {
 
     return(
         <>
-          <div>
-              {children}
-          </div>
+            <div className="containerUserEdit">
+                <section className="userEdit">
+                    {children}
+                </section>
+            </div>
         </>
     )
 }
